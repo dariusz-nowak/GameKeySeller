@@ -27,6 +27,5 @@ gamesList = [
 # edytować cenę względem istniejących oferty
 # usunąć ofertę dla usuniętego klucza
 
-
 # == SKLEPY Z KLUCZAMI ==
 # automatyzacja zakupów na stronach
