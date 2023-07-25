@@ -4,7 +4,7 @@ from re import compile, sub
 
 steam = Steam("STEAM_API_KEY")
 
-def cleanhtml(raw_html):
+def removeHTMLtags(raw_html):
      raw_html = sub(compile('<a.*?/a>') , '', raw_html)
      raw_html = sub(compile('<br>') , '\n', raw_html)
      raw_html = sub(compile('<.*?>') , '', raw_html)
@@ -19,7 +19,7 @@ def getGameInfo(gameName):
     game = game.replace('false', 'False')
     game = literal_eval(game)
     
-    gameDescription = cleanhtml(game[str(gameID)]['data']['detailed_description'])
+    gameDescription = removeHTMLtags(game[str(gameID)]['data']['detailed_description'])
     gameImages = [image['path_full'] for key, image in enumerate(game[str(gameID)]['data']['screenshots']) if key < 5]
 
     return [gameDescription, gameImages]
