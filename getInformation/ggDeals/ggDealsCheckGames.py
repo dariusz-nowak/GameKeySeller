@@ -109,7 +109,7 @@ def createXLSXfile(games):
     workbook.close()
 
 def checkGames():
-    gamesFromGGdeals = loadGamesFromURL('https://gg.deals/deals/?drm=1&minDiscount=1&minRating=9&sort=discount&store=3,5,8,10,14,16,17,18,20,22,26,30,38,40,41,43,45,49,52,53,54,56,57,72,76,80,82,84,86,91,92,94,95,1169,1175')
+    gamesFromGGdeals = loadGamesFromURL('https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=7&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,94,95,1169,1175')
     existingGamesList = loadGamesListFromFile()
     newGamesList = checkExistingGamesInList(gamesFromGGdeals, existingGamesList)
     saveGamesListToFile(newGamesList)

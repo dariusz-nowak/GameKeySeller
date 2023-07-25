@@ -13,7 +13,7 @@ def cleanhtml(raw_html):
 
 def getGameInfo(gameName):
     gameID = steam.apps.search_games(gameName)['apps'][0]['id']
-    game = steam.apps.get_app_details(gameID)
+    game = str(steam.apps.get_app_details(gameID))
     
     game = game.replace('true', 'True')
     game = game.replace('false', 'False')
