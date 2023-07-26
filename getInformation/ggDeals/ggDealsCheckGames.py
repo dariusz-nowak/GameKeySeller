@@ -12,10 +12,9 @@ def loadGamesFromURL(link):
         games = []
         activePage += 1
         def removeSpecialCharactersFromPrice(price):
-            if '~' in price: price = price.replace('~', '')
-            if 'zł' in price: price = price.replace('zł', '')
-            if ' ' in price: price = price.replace(' ', '')
-            if ',' in price: price = price.replace(',', '.')
+            for letter in price:
+                if letter == ',': price = price.replace(',', '.')
+                elif not letter.isnumeric(): price = price.replace(letter, '')
             return float(price)
             
         for _ in range(len(newSoup.find_all('div', class_='game-box-options'))):  games.append([])
@@ -108,10 +107,24 @@ def createXLSXfile(games):
 
     workbook.close()
 
+def sortGamesInList(gamesList):
+    sortedGamesList = {
+        'Nowe' : [],
+        'Droższe' : [],
+        'Tańsze' : [],
+        'Usunięte' : [],
+    }
+    for game in gamesList:
+        if game[4] == 'Nowa pozycja': sortedGamesList['Nowe'].append(game.copy())
+        elif game[4] == 'Wyższa cena': sortedGamesList['Droższe'].append(game.copy())
+        elif game[4] == 'Niższa cena': sortedGamesList['Tańsze'].append(game.copy())
+        elif game[4] == 'Usunięta': sortedGamesList['Usunięte'].append(game.copy())
+    return sortedGamesList
+        
 def checkGames():
     gamesFromGGdeals = loadGamesFromURL('https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=7&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,94,95,1169,1175')
     existingGamesList = loadGamesListFromFile()
     newGamesList = checkExistingGamesInList(gamesFromGGdeals, existingGamesList)
     saveGamesListToFile(newGamesList)
     createXLSXfile(newGamesList)
-    return newGamesList
+    return sortGamesInList(newGamesList)

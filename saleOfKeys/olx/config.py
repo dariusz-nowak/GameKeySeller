@@ -1,14 +1,17 @@
 from requests import post
 
-def oAuthConfig():
-
-    url = 'https://www.olx.pl/api/open/oauth/token'
+def oAuthHeader():
     data = {
         "grant_type": "authorization_code",
         "client_id": "",
         "client_secret": "",
-        "code": "",
         "scope": "v2 read write"
     }
+    accessToken = post('https://www.olx.pl/api/open/oauth/token', json=data).json()['access_token']
 
-    response  = post(url, json = data)
+    headers = {
+        "Authorization": f"Bearer {accessToken}",
+        "Content-Type": "application/json"
+    }
+    
+    return headers

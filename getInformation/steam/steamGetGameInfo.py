@@ -17,6 +17,7 @@ def getGameInfo(gameName):
     
     game = game.replace('true', 'True')
     game = game.replace('false', 'False')
+    game = game.replace('null', 'None')
     game = literal_eval(game)
     
     gameDescription = removeHTMLtags(game[str(gameID)]['data']['detailed_description'])
