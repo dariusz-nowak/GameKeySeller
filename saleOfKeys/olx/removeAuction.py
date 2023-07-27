@@ -1,2 +1,2 @@
-def removeAuction():
+def removeAuction(game, header):
     pass

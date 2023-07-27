@@ -1,2 +1,2 @@
-def createAuction():
+def createAuction(game, header):
     pass

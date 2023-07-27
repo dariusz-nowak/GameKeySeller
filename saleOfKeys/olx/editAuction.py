@@ -1,2 +1,2 @@
-def editAuction():
+def editAuction(game, header):
     pass
