@@ -1,6 +1,8 @@
 from ast import literal_eval
 from requests import get
 from bs4 import BeautifulSoup
+from time import sleep
+from random import random
 
 def loadGamesFromURL(url):
     soup = BeautifulSoup(get(url).content, 'html.parser')
@@ -19,7 +21,9 @@ def loadGamesFromURL(url):
         return float(price)
 
     for _ in range(pages):
-        if currentPage > 1: soup = BeautifulSoup(get(f'{url}&page={currentPage}').content, 'html.parser')
+        if currentPage > 1: 
+            # sleep(random(5, 15))
+            soup = BeautifulSoup(get(f'{url}&page={currentPage}').content, 'html.parser')
 
         for container in soup.find_all('div', class_='game-box-options'):
             games.append({

@@ -1,14 +1,21 @@
 def createAuction(game, header):
+
+    # todo 
+    # wybrać kategorie
+    # wybrać ID miasta
+    # dodać zdjęcia
+    # określić cenę
+
     data = {
-        "title": "string",
-        "description": "string",
+        "title": game['title'],
+        "description": game['description'],
         "category_id": 0,
         "advertiser_type": "private",
-        "external_url": "string",
-        "external_id": "string",
+        "external_url": "",
+        "external_id": "",
         "contact": {
-        "name": "string",
-        "phone": "string"
+        "name": "Dariusz Nowak",
+        "phone": ""
     },
     "location": {
         "city_id": 0,
@@ -44,6 +51,6 @@ def createAuction(game, header):
         ]
         }
     ],
-    "courier": True
+    "courier": False
     }
-    pass
+    

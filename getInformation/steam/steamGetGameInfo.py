@@ -1,6 +1,7 @@
 from ast import literal_eval
 from steam import Steam
 from re import compile, sub
+from time import sleep
 
 steam = Steam("STEAM_API_KEY")
 
@@ -12,7 +13,8 @@ def removeHTMLtags(raw_html):
      return raw_html
 
 def getGameInfo(gameName):
-     gameID = steam.apps.search_games(gameName)['apps'][0]['id']
+     sleep(1.5)
+     gameID = steam.apps.search_games(gameName)['id']
      game = str(steam.apps.get_app_details(gameID))
 
      game = game.replace('true', 'True')
