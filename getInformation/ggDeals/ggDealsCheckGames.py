@@ -1,130 +1,93 @@
 from ast import literal_eval
 from requests import get
 from bs4 import BeautifulSoup
-from xlsxwriter import Workbook
 
-def loadGamesFromURL(link):
-    allGames = []
-    activePage = 1
-    soup = BeautifulSoup(get(f'{link}&page={activePage}').content, 'html.parser')
-    for _ in range(int((soup.find('li', class_='last-page').find('a', class_='pjax-link').text).replace('.', '')) if soup.find('li', class_='last-page') is not None else 1):
-        newSoup = BeautifulSoup(get(f'{link}&page={activePage}').content, 'html.parser')
-        games = []
-        activePage += 1
-        def removeSpecialCharactersFromPrice(price):
-            for letter in price:
-                if letter == ',': price = price.replace(',', '.')
-                elif not letter.isnumeric(): price = price.replace(letter, '')
-            return float(price)
-            
-        for _ in range(len(newSoup.find_all('div', class_='game-box-options'))):  games.append([])
-        for key, gameTitle in enumerate(newSoup.find('div', class_='list-items').find_all('a', class_='game-info-title')): games[key].append(gameTitle.text)
-        for key, gameOldPrice in enumerate(newSoup.find('div', class_='list-items').find_all('span', class_='price-old')): games[key].append(removeSpecialCharactersFromPrice(gameOldPrice.text))
-        for key, gameNewPrice in enumerate(newSoup.find('div', class_='list-items').find_all('span', class_='game-price-new')): games[key].append(removeSpecialCharactersFromPrice(gameNewPrice.text))
-        for key, gameShopLink in enumerate(newSoup.find('div', class_='list-items').find_all('a', class_='shop-link')): games[key].append(gameShopLink['href'])
-        for key, _ in enumerate(games): games[key].append('Brak zmian')
-        allGames.extend(games)
-    return allGames
+def loadGamesFromURL(url):
+    soup = BeautifulSoup(get(url).content, 'html.parser')
+
+    games = []
+    currentPage = 1
+
+    if soup.find('li', class_='last-page') != None: 
+        pages = int(soup.find('li', class_='last-page').text.replace('.', ''))
+    else: pages = 1
     
+    def removeSpecialCharactersFromPrice(price):
+        for char in price:
+            if char == ',': price = price.replace(',', '.')
+            elif not char.isnumeric(): price = price.replace(char, '')
+        return float(price)
+
+    for _ in range(pages):
+        if currentPage > 1: soup = BeautifulSoup(get(f'{url}&page={currentPage}').content, 'html.parser')
+
+        for container in soup.find_all('div', class_='game-box-options'):
+            games.append({
+                'title': container.find('a', class_='game-info-title').text,
+                'old price': removeSpecialCharactersFromPrice(container.find('span', class_='price-old').text),
+                'current price': removeSpecialCharactersFromPrice(container.find('span', class_='game-price-new').text),
+                'store': f'https://gg.deals{container.find("a", class_="shop-link")["href"]}',
+                'status': 'none'
+            })
+        currentPage += 1
+    return games
+
 def loadGamesListFromFile():
     with open("docs/games.txt", "r", encoding='utf8') as file: 
         return literal_eval(file.read())
     
-def checkDeletedGamesInList():
-    pass
-
 def checkExistingGamesInList(newGamesList, existingGamesList):
-    existingGamesTitles = []
-    deletedGamesList = existingGamesList
-    for game in existingGamesList: existingGamesTitles.append(game[0])
-    for key, newGame in enumerate(newGamesList):
-        if newGame[0] not in existingGamesTitles: newGamesList[key][4] = 'Nowa pozycja'
-        else:
-            for existingGame in existingGamesList:
-                if newGame[0] == existingGame[0]:
-                    if newGame[2] > existingGame[2]: newGamesList[key][4] = 'Wyższa cena'
-                    elif newGame[2] < existingGame[2]: newGamesList[key][4] = 'Niższa cena'
-                    deletedGamesList.remove(existingGame)
-    for deletedGame in deletedGamesList: 
-        deletedGame[4] = 'Usunięta'
-        newGamesList.append(deletedGame)
+    existingGamesTitles = [game['title'] for game in existingGamesList]
+    
+    for newGame in newGamesList:
+        if newGame['title'] not in existingGamesTitles: 
+            newGame['status'] = 'new'
+            continue
+
+        for existingGame in existingGamesList:
+            if newGame['title'] == existingGame['title']:
+                if newGame['current price'] > existingGame['current price']: newGame['status'] = 'expensive'
+                elif newGame['current price'] < existingGame['current price']: newGame['status'] = 'cheaper'
+                existingGamesList.remove(existingGame)\
+                
+    for remainingGame in existingGamesList:
+        remainingGame['status'] = 'deleted'
+        newGamesList.append(remainingGame)
+    
     return newGamesList
 
 def saveGamesListToFile(games):
     gamesToSave = []
     for game in games:
-        if game[4] == "Usunięta": break
+        if game['status'] == "Usunięta": break
         else: gamesToSave.append(game)
     with open("docs/games.txt", "w", encoding='utf8') as file: file.write(str(gamesToSave))
 
-def createXLSXfile(games):
-    workbook = Workbook('docs/Games to check.xlsx')
-    allGamesWorksheet = workbook.add_worksheet('Wszystkie')
-    newGamesWorksheet = workbook.add_worksheet('Nowe pozycje')
-    higherPriceGamesWorksheet = workbook.add_worksheet('Droższe')
-    lowerPriceGamesWorksheet = workbook.add_worksheet('Tańsze')
-    deletedGamesWorksheet = workbook.add_worksheet('Usunięte')
-    allGamesRow, newGamesRow, higherPriceGamesRow, lowerPriceGamesRow, deletedGamesRow, col = 1, 1, 1, 1, 1, 0
-
-    worksheets = [
-        [allGamesWorksheet, allGamesRow],
-        [newGamesWorksheet, newGamesRow],
-        [higherPriceGamesWorksheet, higherPriceGamesRow],
-        [lowerPriceGamesWorksheet, lowerPriceGamesRow],
-        [deletedGamesWorksheet, deletedGamesRow],
-    ]
-
-    def saveGameDataInWorksheet(worksheet):
-        worksheet[0].write(worksheet[1], col,     title)
-        worksheet[0].write(worksheet[1], col + 1, oldPrice)
-        worksheet[0].write(worksheet[1], col + 2, newPrice)
-        worksheet[0].write(worksheet[1], col + 3, shopLink)
-        worksheet[0].write(worksheet[1], col + 4, status)
-        worksheet[1] += 1
-
-    def fitWorksheetAndCreateTable(worksheet):
-        worksheet[0].autofit()
-        worksheet[0].add_table(f'A1:D{worksheet[1]}',
-            {
-                'style': 'Table Style Light 1',
-                'columns': [
-                    {'header':'Nazwa gry'},
-                    {'header':'Stara cena'},
-                    {'header':'Nowa cena'},
-                    {'header':'Link'},
-                ],
-            })
-
-    for title, oldPrice, newPrice, shopLink, status in games:
-        saveGameDataInWorksheet(worksheets[0])
-        if status == 'Nowa pozycja': saveGameDataInWorksheet(worksheets[1])
-        elif status == 'Wyższa cena': saveGameDataInWorksheet(worksheets[2])
-        elif status == 'Niższa cena': saveGameDataInWorksheet(worksheets[3])
-        elif status == 'Usunięta': saveGameDataInWorksheet(worksheets[4])
-
-    for worksheet in worksheets: 
-        if worksheet[1] > 1: fitWorksheetAndCreateTable(worksheet)
-
-    workbook.close()
-
 def sortGamesInList(gamesList):
     sortedGamesList = {
-        'Nowe' : [],
-        'Droższe' : [],
-        'Tańsze' : [],
-        'Usunięte' : [],
+        'new' : [],
+        'expensive' : [],
+        'cheaper' : [],
+        'deleted' : [],
     }
+
     for game in gamesList:
-        if game[4] == 'Nowa pozycja': sortedGamesList['Nowe'].append(game.copy())
-        elif game[4] == 'Wyższa cena': sortedGamesList['Droższe'].append(game.copy())
-        elif game[4] == 'Niższa cena': sortedGamesList['Tańsze'].append(game.copy())
-        elif game[4] == 'Usunięta': sortedGamesList['Usunięte'].append(game.copy())
+        if game['status'] == 'new': sortedGamesList['new'].append(game)
+        elif game['status'] == 'expensive': sortedGamesList['expensive'].append(game)
+        elif game['status'] == 'cheaper': sortedGamesList['cheaper'].append(game)
+        elif game['status'] == 'deleted': sortedGamesList['deleted'].append(game)
+
     return sortedGamesList
-        
+
 def checkGames():
-    gamesFromGGdeals = loadGamesFromURL('https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=7&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,94,95,1169,1175')
-    existingGamesList = loadGamesListFromFile()
-    newGamesList = checkExistingGamesInList(gamesFromGGdeals, existingGamesList)
-    saveGamesListToFile(newGamesList)
-    createXLSXfile(newGamesList)
-    return sortGamesInList(newGamesList)
+    # url = 'https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=7&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,94,95,1169,1175'
+    # gamesList = checkExistingGamesInList(
+    #     loadGamesFromURL(url), 
+    #     loadGamesListFromFile()
+    # )
+    # saveGamesListToFile(gamesList)
+
+    gamesList = {'new': [{'title': 'LEGO Star Wars: The Skywalker Saga', 'old price': 206.47, 'current price': 59.17, 'store': 'https://gg.deals/pl/redirect/b546b263ccb10776783f5734ce2babc3c2063091/?utm_source=deals%2Findex', 'status': 'new'}, {'title': "Marvel's Midnight Suns", 'old price': 249.0, 'current price': 85.66, 'store': 'https://gg.deals/pl/redirect/238b63541ffffb2cf46fecc62001159f2cc1a57a/?utm_source=deals%2Findex', 'status': 'new'}], 'expensive': [{'title': "Tiny Tina's Wonderlands", 'old price': 249.0, 'current price': 70.67, 'store': 'https://gg.deals/pl/redirect/f0057754e02fcce6913a158e3ff28c3205f2eb17/?utm_source=deals%2Findex', 'status': 'expensive'}], 'cheaper': [{'title': 'FINAL FANTASY XV WINDOWS EDITION', 'old price': 125.99, 'current price': 63.0, 'store': 'https://gg.deals/pl/redirect/1d0dc429f9f18bda92fc78bb3efca4b05da44000/?utm_source=deals%2Findex', 'status': 'cheaper'}, {'title': 'Tales of Arise', 'old price': 265.4, 'current price': 74.06, 'store': 'https://gg.deals/pl/redirect/cebf54d726ae3e9adb882ffb2755187bc020583b/?utm_source=deals%2Findex', 'status': 'cheaper'}], 'deleted': [{'title': 'xddddd', 'old price': 206.47, 'current price': 59.17, 'store': 'https://gg.deals/pl/redirect/b546b263ccb10776783f5734ce2babc3c2063091/?utm_source=deals%2Findex', 'status': 'deleted'}, {'title': 'wwwwwww', 'old price': 19.0, 'current price': 15.66, 'store': 'https://gg.deals/pl/redirect/238b63541ffffb2cf46fecc62001159f2cc1a57a/?utm_source=deals%2Findex', 'status': 'deleted'}, {'title': 'TEST1', 'old price': 206.47, 'current price': 59.17, 'store': 'https://gg.deals/pl/redirect/b546b263ccb10776783f5734ce2babc3c2063091/?utm_source=deals%2Findex', 'status': 'deleted'}, {'title': 'TEST2', 'old price': 110.56, 'current price': 274.06, 'store': 'https://gg.deals/pl/redirect/886b910766c17d718ec5a3e57967654065d49ffb/?utm_source=deals%2Findex', 'status': 'deleted'}]}
+
+    return gamesList
+    # return sortGamesInList(gamesList)

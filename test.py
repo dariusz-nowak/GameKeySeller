@@ -1,9 +1,27 @@
-sortedGamesList = {
-    'Nowe' : [],
-    'Droższe' : [],
-    'Tańsze' : [],
-    'Usunięte' : [],
-}
-sortedGamesList['Nowe'].append('ad')
+lt = [
+    {
+        'a': 1,
+    },
+    {
+        'a': 2,
+    },
+    {
+        'a': 3,
+    },
+]
 
-print(sortedGamesList)
+lt2 = [
+    {
+        'a': 1,
+    },
+    {
+        'a': 2,
+    },
+]
+
+print(lt)
+print(lt2)
+lt += lt2
+print(lt)
+
+asads = [{'title': 'TEST', 'old price': 119.72, 'current price': 29.94, 'store': 'https://gg.deals/pl/redirect/4f1bafcc5ad129023cf7b24bf8f64f74c43a3243/?utm_source=deals%2Findex', 'status': None}, {'title': 'Phoenix Wright: Ace Attorney Trilogy', 'old price': 119.72, 'current price': 29.94, 'store': 'https://gg.deals/pl/redirect/4f1bafcc5ad129023cf7b24bf8f64f74c43a3243/?utm_source=deals%2Findex', 'status': None}, {'title': "Marvel's Midnight Suns", 'old price': 249.0, 'current price': 85.66, 'store': 'https://gg.deals/pl/redirect/238b63541ffffb2cf46fecc62001159f2cc1a57a/?utm_source=deals%2Findex', 'status': None}, {'title': 'Gotham Knights', 'old price': 239.47, 'current price': 50.3, 'store': 'https://gg.deals/pl/redirect/1c5fdb6e29209be8a996401b5a1219db67426576/?utm_source=deals%2Findex', 'status': None}, {'title': 'Back 4 Blood', 'old price': 199.0, 'current price': 33.83, 'store': 'https://gg.deals/pl/redirect/87fc19dfb6794e8fb08791180969596607f7a36f/?utm_source=deals%2Findex', 'status': None}, {'title': 'Smalland: Survive the Wilds', 'old price': 99.76, 'current price': 55.85, 'store': 'https://gg.deals/pl/redirect/231d46de0f9edcd003e5ff0432194291736a027d/?utm_source=deals%2Findex', 'status': None}, {'title': 'FINAL FANTASY XV WINDOWS EDITION', 'old price': 125.99, 'current price': 63.0, 'store': 'https://gg.deals/pl/redirect/1d0dc429f9f18bda92fc78bb3efca4b05da44000/?utm_source=deals%2Findex', 'status': None}, {'title': 'SCARLET NEXUS', 'old price': 221.16, 'current price': 39.59, 'store': 'https://gg.deals/pl/redirect/ec89f8507a77ed5ffc8fe717df18840a7fe37b38/?utm_source=deals%2Findex', 'status': None}, {'title': "JoJo's Bizarre Adventure: All-Star Battle R", 'old price': 199.56, 'current price': 83.83, 'store': 'https://gg.deals/pl/redirect/01261a0efc2a62665327e9821fbcc19451db8a9b/?utm_source=deals%2Findex', 'status': None}, {'title': 'DRAGON BALL Z: KAKAROT', 'old price': 239.47, 'current price': 51.85, 'store': 'https://gg.deals/pl/redirect/79c31d783a21d25137b4b83ef63f476ae76f506c/?utm_source=deals%2Findex', 'status': None}, {'title': 'RESIDENT EVIL 3', 'old price': 170.33, 'current price': 32.48, 'store': 'https://gg.deals/pl/redirect/55f77c5ac75fed8161addd8661fc7e31d5dcf4e9/?utm_source=deals%2Findex', 'status': None}, {'title': 'TEST2', 'old price': 265.4, 'current price': 74.06, 'store': 'https://gg.deals/pl/redirect/cebf54d726ae3e9adb882ffb2755187bc020583b/?utm_source=deals%2Findex', 'status': None}, {'title': 'DREDGE', 'old price': 110.56, 'current price': 74.06, 'store': 'https://gg.deals/pl/redirect/886b910766c17d718ec5a3e57967654065d49ffb/?utm_source=deals%2Findex', 'status': None}, {'title': 'Outer Wilds', 'old price': 101.71, 'current price': 41.67, 'store': 'https://gg.deals/pl/redirect/7459ed1d0cfee3e7662712eca53b83465418826e/?utm_source=deals%2Findex', 'status': None}, {'title': 'HUMANKIND', 'old price': 199.56, 'current price': 39.88, 'store': 'https://gg.deals/pl/redirect/5449e9d05d9c371645856a0fa0851908df5c4228/?utm_source=deals%2Findex', 'status': None}, {'title': 'ONE PIECE ODYSSEY', 'old price': 265.4, 'current price': 110.16, 'store': 'https://gg.deals/pl/redirect/b675e65f1824c8ccdaf3bd97c0898a6e7f8d37c7/?utm_source=deals%2Findex', 'status': None}, {'title': 'What Remains of Edith Finch', 'old price': 84.01, 'current price': 17.17, 'store': 'https://gg.deals/pl/redirect/6aaf27e0ee608a04f7ba03cdb2bd84f12643c0e0/?utm_source=deals%2Findex', 'status': None}, {'title': 'The Quarry', 'old price': 239.47, 'current price': 75.81, 'store': 'https://gg.deals/pl/redirect/8a1c73ee4c9c484ad3afda9b2f10b32fedad3618/?utm_source=deals%2Findex', 'status': None}, {'title': 'Shadow Warrior 2', 'old price': 123.83, 'current price': 12.34, 'store': 'https://gg.deals/pl/redirect/1426ed0e57f8aa95615825ebd14761e6a0998c06/?utm_source=deals%2Findex', 'status': None}, {'title': 'Yakuza: Like a Dragon', 'old price': 239.47, 'current price': 59.84, 'store': 'https://gg.deals/pl/redirect/ed1df0212e1ee21b4e7b1b804811c01f0dc3f611/?utm_source=deals%2Findex', 'status': None}, {'title': 'BLACKTAIL', 'old price': 119.72, 'current price': 59.84, 'store': 'https://gg.deals/pl/redirect/e4d47dcb4d57fbc8df0c2aa2d255869aca41b16f/?utm_source=deals%2Findex', 'status': None}, {'title': 'Twelve Minutes', 'old price': 101.71, 'current price': 41.67, 'store': 'https://gg.deals/pl/redirect/2764b69b07f65a82b03c8d246d95ffaf026ce21a/?utm_source=deals%2Findex', 'status': None}, {'title': 'Warhammer 40,000: Darktide', 'old price': 159.64, 'current price': 94.97, 'store': 'https://gg.deals/pl/redirect/16e7a29d83268de83a027e8e7555fa407c714f20/?utm_source=deals%2Findex', 'status': None}, {'title': 'TEST3', 'old price': 239.47, 'current price': 79.04, 'store': 'https://gg.deals/pl/redirect/1c67a6f965f0ffd8b46986feb142dcfea2036c90/?utm_source=deals%2Findex', 'status': None}, {'title': 'Like a Dragon: Ishin!', 'old price': 239.47, 'current price': 160.43, 'store': 'https://gg.deals/pl/redirect/3edf69732466122c44e3a1a6c61e51e8819aed3b/?utm_source=deals%2Findex', 'status': None}, {'title': 'Neon White', 'old price': 101.71, 'current price': 55.65, 'store': 'https://gg.deals/pl/redirect/4426250dcc0c8e3f5d0683282f615050a9ecfb2f/?utm_source=deals%2Findex', 'status': None}]
