@@ -20,6 +20,7 @@ def getDataFromSteam(gamesList):
         except UnboundLocalError:
             game['status'] = 'unknown'
             with open("docs/titlesToRepair.txt", "a", encoding='utf8') as file: file.write(f'{game["title"]}\n')
+    return gamesList
 
 # == OLX ==
 def olxActions(gamesList):
@@ -36,7 +37,7 @@ def olxActions(gamesList):
 
 def app():
     # gamesList = getGamesFromGGdeals()
-    # getDataFromSteam(gamesList['new'])
+    # gamesList['new'] = getDataFromSteam(gamesList['new'])
     
     # with open("docs/steamGameList.txt", "w", encoding='utf8') as file: file.write(f'{gamesList}\n')
     with open("docs/steamGameList.txt", "r", encoding='utf8') as file: 

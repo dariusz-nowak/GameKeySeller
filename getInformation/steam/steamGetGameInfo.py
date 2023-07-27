@@ -14,7 +14,7 @@ def removeHTMLtags(raw_html):
 
 def getGameInfo(gameName):
      print(f'loading {gameName}')
-     sleep(2)
+     sleep(3.2)
      gameID = steam.apps.search_games(gameName)['id']
      game = str(steam.apps.get_app_details(gameID))
 

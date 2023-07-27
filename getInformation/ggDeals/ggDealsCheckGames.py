@@ -22,9 +22,9 @@ def loadGamesFromURL(url):
 
     for _ in range(pages):
         print(f'loading page {currentPage}')
-        if currentPage > 1: 
-            sleep(randint(5, 10))
-            soup = BeautifulSoup(get(f'{url}&page={currentPage}').content, 'html.parser')
+        sleep(randint(20, 40))
+        
+        if currentPage > 1: soup = BeautifulSoup(get(f'{url}&page={currentPage}').content, 'html.parser')
 
         for container in soup.find_all('div', class_='game-box-options'):
             games.append({
@@ -85,7 +85,7 @@ def sortGamesInList(gamesList):
     return sortedGamesList
 
 def checkGames():
-    url = 'https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=5&platform=1&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,95'
+    url = 'https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=6&platform=1&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,95'
     gamesList = checkExistingGamesInList(
         loadGamesFromURL(url), 
         loadGamesListFromFile()
