@@ -85,11 +85,15 @@ def sortGamesInList(gamesList):
     return sortedGamesList
 
 def checkGames():
-    url = 'https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=6&platform=1&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,95'
-    gamesList = checkExistingGamesInList(
-        loadGamesFromURL(url), 
-        loadGamesListFromFile()
-    )
-    saveGamesListToFile(gamesList)
+    # url = 'https://gg.deals/deals/?drm=1&minDiscount=1&minPrice=1&minRating=6&platform=1&store=3,8,14,16,17,18,20,26,30,40,41,43,45,49,52,53,54,56,76,80,82,84,86,91,92,95'
+    # gamesList = checkExistingGamesInList(
+    #     loadGamesFromURL(url), 
+    #     loadGamesListFromFile()
+    # )
+    # saveGamesListToFile(gamesList)
+
+    with open("docs/GGdealsGamesList.txt", "r", encoding='utf8') as file: 
+        gamesList = literal_eval(file.read())
+
     return sortGamesInList(gamesList)
     

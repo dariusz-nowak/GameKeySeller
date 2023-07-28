@@ -1,2 +1,6 @@
-def editAuction(game, header):
-    pass
+from requests import post
+
+def editAuction(game, header, url):
+    data = {
+
+    }
