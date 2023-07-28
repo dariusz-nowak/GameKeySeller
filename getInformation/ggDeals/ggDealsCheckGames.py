@@ -50,10 +50,8 @@ def checkExistingGamesInList(newGamesList, existingGamesList):
             continue
 
         for existingGame in existingGamesList:
-            if newGame['title'] == existingGame['title']:
-                if newGame['current price'] > existingGame['current price']: newGame['status'] = 'expensive'
-                elif newGame['current price'] < existingGame['current price']: newGame['status'] = 'cheaper'
-                existingGamesList.remove(existingGame)
+            if newGame['title'] == existingGame['title'] and newGame['current price'] != existingGame['current price']: newGame['status'] = 'different price'
+            existingGamesList.remove(existingGame)
                 
     for remainingGame in existingGamesList:
         remainingGame['status'] = 'deleted'

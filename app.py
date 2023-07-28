@@ -2,13 +2,13 @@ from getInformation.ggDeals.ggDealsCheckGames import checkGames, saveGamesListTo
 from getInformation.steam.steamGetGameInfo import getGameInfo
 from getInformation.steam.exceptions import checkException
 from getInformation.steam.exclusions import checkExclusions
+from saleOfKeys.olx.advertsActions import oAuthHeader
 from saleOfKeys.olx.createAdvert import createAuction
 from saleOfKeys.olx.editAdvert import editAuction
 from saleOfKeys.olx.removeAdvert import removeAuction
-from saleOfKeys.olx.config import oAuthHeader
 from ast import literal_eval
 
-olxURL = "https://www.olx.pl"
+olxURL = ""
 
 # == GG.DEALS ==
 def getGamesFromGGdeals():
@@ -33,42 +33,25 @@ def getDataFromSteam(gamesList):
 
 # == OLX ==
 def olxActions(gamesList):
-    # header = oAuthHeader(f'{olxURL}/api/open/oauth/token')
-    header = 'a'
+    header = oAuthHeader('https://www.olx.pl/api/open/oauth/token')
     for gameType in gamesList:
         for game in gamesList[gameType]:
-            if game['status'] == 'new': createAuction(game, header, f'{olxURL}/api/partner/adverts')
-            elif game['status'] == 'expensive' or game['status'] == 'cheaper': editAuction(game, header)
+            if game['status'] == 'new': createAuction(game, header)
+            elif game['status'] == 'different price': editAuction(game, header)
             elif game['status'] == 'deleted': removeAuction(game, header)
-
-def getAdvertID():
-    pass
-
-def addAdvert(advert):
-    with open("docs/adverts.txt", "r", encoding='utf8') as file: 
-        adverts = literal_eval(file.read())
-        adverts.append(advert)
-    with open("docs/adverts.txt", "w", encoding='utf8') as file: 
-        file.write(str(adverts))
-
-    # for active in activeAdverts:
-    #     if ggDealsgame['title'] == game['title']: ggDealsGamesList.remove(ggDealsgame)
-
-def removeAdvert():
-    pass
 
 # == SKLEPY Z KLUCZAMI ==
 # automatyzacja zakupów na stronach
 
 def app():
-    gamesList = getGamesFromGGdeals()
-    gamesList['new'] = getDataFromSteam(gamesList['new'])
+    # gamesList = getGamesFromGGdeals()
+    # gamesList['new'] = getDataFromSteam(gamesList['new'])
     
     # with open("docs/steamGameList.txt", "w", encoding='utf8') as file: file.write(f'{gamesList}\n')
-    # with open("docs/steamGameList.txt", "r", encoding='utf8') as file: 
-    #     gamesList = literal_eval(file.read())
+    with open("docs/steamGameList.txt", "r", encoding='utf8') as file: 
+        gamesList = literal_eval(file.read())
 
-    # olxActions(gamesList)
+    olxActions(gamesList)
 
 app()
 
