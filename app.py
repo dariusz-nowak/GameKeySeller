@@ -2,9 +2,9 @@ from getInformation.ggDeals.ggDealsCheckGames import checkGames, saveGamesListTo
 from getInformation.steam.steamGetGameInfo import getGameInfo
 from getInformation.steam.exceptions import checkException
 from getInformation.steam.exclusions import checkExclusions
-from saleOfKeys.olx.createAuction import createAuction
-from saleOfKeys.olx.editAuction import editAuction
-from saleOfKeys.olx.removeAuction import removeAuction
+from saleOfKeys.olx.createAdvert import createAuction
+from saleOfKeys.olx.editAdvert import editAuction
+from saleOfKeys.olx.removeAdvert import removeAuction
 from saleOfKeys.olx.config import oAuthHeader
 from ast import literal_eval
 
@@ -40,6 +40,22 @@ def olxActions(gamesList):
             if game['status'] == 'new': createAuction(game, header, f'{olxURL}/api/partner/adverts')
             elif game['status'] == 'expensive' or game['status'] == 'cheaper': editAuction(game, header)
             elif game['status'] == 'deleted': removeAuction(game, header)
+
+def getAdvertID():
+    pass
+
+def addAdvert(advert):
+    with open("docs/adverts.txt", "r", encoding='utf8') as file: 
+        adverts = literal_eval(file.read())
+        adverts.append(advert)
+    with open("docs/adverts.txt", "w", encoding='utf8') as file: 
+        file.write(str(adverts))
+
+    # for active in activeAdverts:
+    #     if ggDealsgame['title'] == game['title']: ggDealsGamesList.remove(ggDealsgame)
+
+def removeAdvert():
+    pass
 
 # == SKLEPY Z KLUCZAMI ==
 # automatyzacja zakupów na stronach

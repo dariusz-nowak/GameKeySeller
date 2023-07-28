@@ -1,3 +1,4 @@
+from app import addAdvert
 from requests import post
 from math import ceil
 
@@ -64,5 +65,10 @@ def createAuction(game, header, url):
     "courier": False
     }
 
-    # post(url, headers=header, json = data)
+    advert = post(url, headers=header, json = data)
     
+    addAdvert({
+        'id': advert['id'],
+        'title': advert['title'],
+        'url': advert['url'],
+    })
