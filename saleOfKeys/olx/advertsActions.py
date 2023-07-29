@@ -1,22 +1,34 @@
 from requests import post
 from ast import literal_eval
 
-def oAuthHeader(url):
-    data = {
-        "grant_type": "authorization_code",
-        "client_id": "",
-        "client_secret": "",
-        "scope": "v2 read write"
-    }
-    accessToken = post(url, json=data).json()['access_token']
+clientID = None
+client_secret = None
 
-    headers = {
+def oAuthHeader():
+
+    tokenInformations = post('https://www.olx.pl/api/open/oauth/token', json = {
+        "grant_type": "authorization_code",
+        "client_id": clientID,
+        "client_secret": client_secret,
+        "scope": "v2 read write"
+    }).json()
+    
+    if tokenInformations['expires_in'] == 0: 
+        tokenInformations['access_token'] = refreshAccessToken(tokenInformations['refresh_token'])
+
+    return {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {accessToken}",
+        "Authorization": f"Bearer {tokenInformations['access_token']}",
         "Version": 2.0,
     }
-    
-    return headers
+
+def refreshAccessToken(refreshToken):
+    return post('https://www.olx.pl/api/open/oauth/token', json = {
+        "grant_type": "refresh_token",
+        "client_id": clientID,
+        "client_secret": client_secret,
+        "refresh_token": refreshToken
+    }).json()['access_token'] # Sprawdzić, co zwraca zapytanie. Zwrócić access_token
 
 def priceDetermination(currentPrice, oldPrice):
     quotient = (1 - (currentPrice / oldPrice)) * 100
@@ -30,7 +42,7 @@ def priceDetermination(currentPrice, oldPrice):
     if int(str(round(sellPrice, 2))[-4]) < 5: sellPrice += 5
     if sellPrice > oldPrice: sellPrice = oldPrice - 10
 
-    return round(sellPrice, -1) - 0.01
+    return float(round(sellPrice, -1) - 0.01)
 
 def createDataJSON(game):
     return {
@@ -52,7 +64,7 @@ def createDataJSON(game):
     },
     "images": game['images'],
     "price": {
-        "value": float(priceDetermination(game['current price'], game['old price'])),
+        "value": priceDetermination(game['current price'], game['old price']),
         "currency": "PLN",
         "negotiable": False,
         "trade": False,

@@ -1,10 +1,20 @@
-a = [1,2,3,4,5,6,7,8]
+lt = {
+        'new': [{
+            'a': 1,
+            'b': 2
+            }],
+        'old': [{
+            'a': 1,
+            'b': 2
+        }]
+    }
 
+for a in lt:
+    print(a)
+    for b in a: 
+        print(b)
 
-def aaa(a):
-    for x in a: 
-        print(x)
-        if x == 3: 
-            return 'X'
-
-print(aaa(a))
+for a in lt:
+    print(a)
+    for b in lt[a]: 
+        print(b)

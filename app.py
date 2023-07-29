@@ -14,26 +14,31 @@ olxURL = ""
 def getGamesFromGGdeals():
    return checkGames()
 
-def removeGameFromGGdealsFile(game):
-    with open("docs/games.txt", "r", encoding='utf8') as file: ggDealsGamesList = literal_eval(file.read())
+def removeGameFromGGdealsFile(games):
+    with open("docs/games.txt", "r", encoding='utf8') as file: 
+        ggDealsGamesList = literal_eval(file.read())
     for ggDealsgame in ggDealsGamesList:
-        if ggDealsgame['title'] == game['title']: ggDealsGamesList.remove(ggDealsgame)
+        for game in games:
+            if ggDealsgame['title'] == game['title']: ggDealsGamesList.remove(ggDealsgame)
     saveGamesListToFile(ggDealsGamesList)
 
 # == STEAM ==
-def getDataFromSteam(gamesList):
+def getDataFromSteam(gamesList, exclusionsList):
+    gamesToRemoveFromGGdealsFile = []
     for game in gamesList:
-        if game['title'] in checkExclusions(): continue
+        if game['title'] in exclusionsList: continue
         try: game.update(getGameInfo(checkException(game['title']))) == 1
         except UnboundLocalError: 
             game['status'] = 'unknown'
-            removeGameFromGGdealsFile(game)
-            with open("docs/titlesToRepair.txt", "a", encoding='utf8') as file: file.write(f'{game["title"]}\n')
+            gamesToRemoveFromGGdealsFile.append(game)
+            with open("docs/titlesToRepair.txt", "a", encoding='utf8') as file: 
+                file.write(f'{game["title"]}\n')
+    removeGameFromGGdealsFile(gamesToRemoveFromGGdealsFile)
     return gamesList
 
 # == OLX ==
 def olxActions(gamesList):
-    header = oAuthHeader('https://www.olx.pl/api/open/oauth/token')
+    header = oAuthHeader()
     for gameType in gamesList:
         for game in gamesList[gameType]:
             if game['status'] == 'new': createAuction(game, header)
@@ -45,7 +50,7 @@ def olxActions(gamesList):
 
 def app():
     # gamesList = getGamesFromGGdeals()
-    # gamesList['new'] = getDataFromSteam(gamesList['new'])
+    # gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
     
     # with open("docs/steamGameList.txt", "w", encoding='utf8') as file: file.write(f'{gamesList}\n')
     with open("docs/steamGameList.txt", "r", encoding='utf8') as file: 
