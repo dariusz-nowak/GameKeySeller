@@ -58,6 +58,11 @@ def app():
 
     olxActions(gamesList)
 
+# Zrobić nieskończoną pętlę:
+# 1. Wywołanie app()
+# 2. Kilkukrotne sprawdzenie zakupów (co 5-10 minut)
+#   a) Wywołanie auto-zakupu
+
 app()
 
 # get city, categories

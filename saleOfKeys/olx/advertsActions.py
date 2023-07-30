@@ -19,7 +19,7 @@ def oAuthHeader():
     return {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {tokenInformations['access_token']}",
-        "Version": 2.0,
+        "Version": "2.0",
     }
 
 def refreshAccessToken(refreshToken):
