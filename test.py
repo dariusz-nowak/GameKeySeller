@@ -1,20 +1,6 @@
-lt = {
-        'new': [{
-            'a': 1,
-            'b': 2
-            }],
-        'old': [{
-            'a': 1,
-            'b': 2
-        }]
-    }
+from bs4 import BeautifulSoup
+from requests import get
 
-for a in lt:
-    print(a)
-    for b in a: 
-        print(b)
+link = 'https://gg.deals/deals/?sort=price'
 
-for a in lt:
-    print(a)
-    for b in lt[a]: 
-        print(b)
+soup = BeautifulSoup(get(link).content, 'html.parser')
