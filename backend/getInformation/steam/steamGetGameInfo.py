@@ -3,7 +3,7 @@ from steam import Steam
 from re import compile, sub
 from time import sleep
 
-steam = Steam("STEAM_API_KEY")
+steam = Steam("5017E3CC647B3610F0029724DCFE8774")
 
 def removeHTMLtags(raw_html):
      raw_html = sub(compile('<a.*?/a>') , '', raw_html)

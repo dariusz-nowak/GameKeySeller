@@ -1,11 +1,11 @@
-from getInformation.ggDeals.ggDealsCheckGames import checkGames, saveGamesListToFile
-from getInformation.steam.steamGetGameInfo import getGameInfo
-from getInformation.steam.exceptions import checkException
-from getInformation.steam.exclusions import checkExclusions
-from saleOfKeys.olx.advertsActions import oAuthHeader
-from saleOfKeys.olx.createAdvert import createAuction
-from saleOfKeys.olx.editAdvert import editAuction
-from saleOfKeys.olx.removeAdvert import removeAuction
+from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames, saveGamesListToFile
+from backend.getInformation.steam.steamGetGameInfo import getGameInfo
+from backend.getInformation.steam.exceptions import checkException
+from backend.getInformation.steam.exclusions import checkExclusions
+from backend.saleOfKeys.olx.advertsActions import oAuthHeader
+from backend.saleOfKeys.olx.createAdvert import createAuction
+from backend.saleOfKeys.olx.editAdvert import editAuction
+from backend.saleOfKeys.olx.removeAdvert import removeAuction
 from ast import literal_eval
 
 olxURL = ""

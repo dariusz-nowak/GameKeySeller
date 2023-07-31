@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+body {
+    max-height: 100vh;
+    overflow: hidden;
+}
+/* .todo {
+    color: red;
+} */
+.content {
+    display: flex;
+    height: 100vh;
+}
+.content .panel {
+    flex-basis: 250px;
+    padding: 25px 0 25px;
+    border: none;
+    background-color: #313640;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+.content .panel .list {
+    margin-bottom: 25px;
+    padding: 0 15px 0 30px;
+}
+.content .panel .list h2 {
+    font-size: 18px;
+}
+.content .panel .list ul {
+    margin-top: 5px;
+    list-style: none;
+}
+.content .panel .list ul li {
+    padding: 7px 0 7px 20px;
+    transition: .4s;
+    font-size: 16px;
+    cursor: pointer;
+}
+.content .panel .list ul li:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.content .panel .server-status {
+    margin-top: auto;
+    text-align: center;
+}
+.content .panel .separate {
+    height: 1px;
+    margin-bottom: 30px;
+    background-color: #555;
+}
+.content .data {
+    flex-basis: calc(100% - 250px);
+    padding: 25px;
+    background-color: #222;
+    color: white;
+    border: 1px solid black;
+}
+.content .homepage {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+.content .homepage > div {
+    flex-basis: 50%;
+    align-self: center;
+    text-align: center;
+}

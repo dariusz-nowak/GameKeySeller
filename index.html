@@ -4,35 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel zarządzania</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="frontend/css/style.css">
 </head>
 <body>
     <div class="content">
         <div class="panel">
             <div class="list">
-                <h2>Oferty</h2>
+                <h2>Raporty</h2>
                 <ul>
-                    <li>OLX</li>
+                    <li class="todo">Strona główna</li>
+                    <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
+                    <li class="todo">Sprzedaż</li>
+                    <!-- Zakup per gra/gry oraz per czas -->
+                    <li class="todo">Zakup</li>
                 </ul>
             </div>
             <div class="list">
-                <h2>Raporty</h2>
+                <h2>Statystyki</h2>
                 <ul>
-                    <li>Sprzedaż</li>
+                    <!-- Popularność stron zakupowych per kraj lub świat oraz per czas -->
+                    <li class="todo">Popularne strony</li>
+                    <!-- Popularność gier per kraj lub świat oraz per czas -->
+                    <li class="todo">Popularne gry</li>
+                </ul>
+            </div>
+            <div class="list">
+                <h2>Oferty</h2>
+                <ul>
+                    <!-- Dodać wszystkie dostępne kraje sprzedaży OLX w widoku OLX/ALLEGRO -->
+                    <li class="todo">OLX</li>
+                    <li class="todo">ALLEGRO</li>
+                </ul>
+            </div>
+            <div class="separate"></div>
+            <div class="list">
+                <h2>Baza danych</h2>
+                <ul>
+                    <li class="todo">Edytuj grę</li>
+                    <li class="todo">Dodaj zakup</li>
+                    <li class="todo">Dodaj sprzedaż</li>
                 </ul>
             </div>
             <div class="list">
                 <h2>Serwer</h2>
                 <ul>
-                    <li>Uruchom</li>
-                    <li>Zatzymaj</li>
-                    <li>Synchronizuj</li>
-                </ul>
-            </div>
-            <div class="list">
-                <h2>Dane</h2>
-                <ul>
-                    <li>Link gg.deals</li>
+                    <!-- Uruchomienie app() jeśli wyłączony -->
+                    <li class="todo">Uruchom</li>
+                    <!-- Zatrzymanie app() jeśli włączony -->
+                    <li class="todo">Zatzymaj</li>
                 </ul>
             </div>
             <div class="server-status">
@@ -40,9 +59,7 @@
                 <p class="status">ONLINE</p>
             </div>
         </div>
-        <div class="data">
-            dane
-        </div>
+        <div class="data"></div>
     </div>
 </body>
 </html>
