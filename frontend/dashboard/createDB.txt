@@ -1,0 +1,11 @@
+https://sql.js.org/examples/GUI/
+
+DROP TABLE IF EXISTS games;
+
+CREATE TABLE games (id integer, title text, old_price float, current_price float, status text, time_created DATETIME, time_modyfied DATETIME);
+CREATE TABLE games_description (id integer, descriptionTXT text, descriptionHTML text);
+CREATE TABLE games_images (id integer, imageURL1 text, imageURL2 text, imageURL3 text, imageURL4 text, imageURL5 text);
+CREATE TABLE adverts (id integer, title text, image text, price float, url text);
+CREATE TABLE sale (id integer, title text, buy_page text, buy_price float, sell_price float, platform text, time_created DATETIME, time_modyfied DATETIME);
+
+SELECT * FROM games;

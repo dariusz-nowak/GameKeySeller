@@ -15,8 +15,6 @@ Games
 		game_id
 		descriptionTXT
 		descriptionHTML
-		time_created
-		time_modyfied
 
 	Zdjęcia gier
 		game_id
@@ -34,8 +32,8 @@ Adverts
 Sale
 	id
 	game_title
-	buy_price
     buy_page
+	buy_price
 	sell_price
 	platform (olx.pl/olx.ua/allegro)
 	time_created
