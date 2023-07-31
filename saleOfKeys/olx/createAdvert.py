@@ -1,8 +1,8 @@
-from saleOfKeys.olx.advertsActions import addAdvert, createDataJSON
+from saleOfKeys.olx.advertsActions import addAdvert, createAdvertData
 from requests import post
 
 def createAuction(game, header):
-    advert = post('https://www.olx.pl/api/partner/adverts', headers=header, json = createDataJSON(game))
+    advert = post('https://www.olx.pl/api/partner/adverts', headers=header, json = createAdvertData(game))
     
     addAdvert({
         'id': advert['id'],

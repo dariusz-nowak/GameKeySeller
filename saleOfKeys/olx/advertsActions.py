@@ -44,7 +44,7 @@ def priceDetermination(currentPrice, oldPrice):
 
     return float(round(sellPrice, -1) - 0.01)
 
-def createDataJSON(game):
+def createAdvertData(game):
     return {
         "title": game['title'],
         "description": game['description'],
