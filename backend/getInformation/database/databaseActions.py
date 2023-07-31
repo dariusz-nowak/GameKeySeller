@@ -1,4 +1,6 @@
+
 from sqlite3 import connect
+from ast import literal_eval
 
 connection = connect("backend/database/sql.db")
 cursor = connection.cursor()
@@ -16,7 +18,7 @@ def removeGame(gameID):
     cursor.execute(f"DELETE FROM games WHERE id = {gameID}")
     connection.commit()
 
-def loadGamesListFromDB():
+def loadGamesList():
     gamesList = []
     gamesFromDB = cursor.execute("SELECT * FROM games").fetchall()
 
@@ -32,10 +34,22 @@ def loadGamesListFromDB():
 
     return gamesList
 
-def editGamesListInDB(gamesList):
+def editGamesList(gamesList):
     for game in gamesList:
         if game['status'] == 'new': addGame(game)
         elif game['status'] in ['different price', 'no changes']: editGame(game)
         elif game['status'] == 'deleted': removeGame(game['id'])
 
     return gamesList
+
+def getAdvertID(gameID):
+    pass
+
+def addAdvert(advert):
+    pass
+
+def editAdvert(advert):
+    pass
+
+def removeAdvert(gameID):
+    pass

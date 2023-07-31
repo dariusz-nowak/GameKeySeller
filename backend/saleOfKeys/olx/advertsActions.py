@@ -1,6 +1,4 @@
 from requests import post
-from ast import literal_eval
-from re import sub
 
 clientID = None
 client_secret = None
@@ -83,28 +81,7 @@ def createAdvertData(game):
         "value": "string",
         "values": [
             "string"
-        ]
-        }
-    ],
+            ]
+        }],
     "courier": False
     }
-
-def getAdvertID(gameTitle):
-    with open("docs/adverts.txt", "r", encoding='utf8') as file: 
-        adverts = literal_eval(file.read())
-        for advert in adverts:
-            if gameTitle == advert['title']: return advert['id']
-
-def addAdvert(advert):
-    with open("docs/adverts.txt", "r", encoding='utf8') as file: 
-        adverts = literal_eval(file.read())
-        adverts.append(advert)
-    with open("docs/adverts.txt", "w", encoding='utf8') as file: file.write(str(adverts))
-
-def removeAdvert(gameTitle):
-    with open("docs/adverts.txt", "r", encoding='utf8') as file: 
-        adverts = literal_eval(file.read())
-        for advert in adverts:
-            if gameTitle == advert['title']: adverts.remove(advert)
-            break
-    with open("docs/adverts.txt", "w", encoding='utf8') as file: file.write(str(adverts))
