@@ -1,4 +1,4 @@
-from saleOfKeys.olx.advertsActions import addAdvert, createAdvertData
+from backend.saleOfKeys.olx.advertsActions import addAdvert, createAdvertData
 from requests import post
 
 def createAuction(game, header):

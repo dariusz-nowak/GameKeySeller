@@ -15,8 +15,8 @@ def removeHTMLtags(raw_html):
 def getGameInfo(gameName):
      print(f'loading {gameName}')
      sleep(3.2)
-     gameID = steam.apps.search_games(gameName)['id']
-     game = str(steam.apps.get_app_details(gameID))
+     gameSteamID = steam.apps.search_games(gameName)['id']
+     game = str(steam.apps.get_app_details(gameSteamID))
 
      game = game.replace('true', 'True')
      game = game.replace('false', 'False')
@@ -24,6 +24,6 @@ def getGameInfo(gameName):
      game = literal_eval(game)
 
      return {
-          'description': removeHTMLtags(game[str(gameID)]['data']['detailed_description']), 
-          'images': [{'url': image['path_full']} for key, image in enumerate(game[str(gameID)]['data']['screenshots']) if key < 5]
+          'description': removeHTMLtags(game[str(gameSteamID)]['data']['detailed_description']), 
+          'images': [{'url': image['path_full']} for key, image in enumerate(game[str(gameSteamID)]['data']['screenshots']) if key < 5]
      }

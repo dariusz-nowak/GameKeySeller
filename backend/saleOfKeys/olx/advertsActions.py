@@ -1,11 +1,11 @@
 from requests import post
 from ast import literal_eval
+from re import sub
 
 clientID = None
 client_secret = None
 
 def oAuthHeader():
-
     tokenInformations = post('https://www.olx.pl/api/open/oauth/token', json = {
         "grant_type": "authorization_code",
         "client_id": clientID,

@@ -1,4 +1,5 @@
-from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames, saveGamesListToFile
+from backend.getInformation.database.databaseActions import removeGame
+from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames
 from backend.getInformation.steam.steamGetGameInfo import getGameInfo
 from backend.getInformation.steam.exceptions import checkException
 from backend.getInformation.steam.exclusions import checkExclusions
@@ -6,34 +7,19 @@ from backend.saleOfKeys.olx.advertsActions import oAuthHeader
 from backend.saleOfKeys.olx.createAdvert import createAuction
 from backend.saleOfKeys.olx.editAdvert import editAuction
 from backend.saleOfKeys.olx.removeAdvert import removeAuction
-from ast import literal_eval
-
-olxURL = ""
 
 # == GG.DEALS ==
 def getGamesFromGGdeals():
    return checkGames()
 
-def removeGameFromGGdealsFile(games):
-    with open("docs/games.txt", "r", encoding='utf8') as file: 
-        ggDealsGamesList = literal_eval(file.read())
-    for ggDealsgame in ggDealsGamesList:
-        for game in games:
-            if ggDealsgame['title'] == game['title']: ggDealsGamesList.remove(ggDealsgame)
-    saveGamesListToFile(ggDealsGamesList)
-
 # == STEAM ==
 def getDataFromSteam(gamesList, exclusionsList):
-    gamesToRemoveFromGGdealsFile = []
     for game in gamesList:
         if game['title'] in exclusionsList: continue
         try: game.update(getGameInfo(checkException(game['title']))) == 1
         except UnboundLocalError: 
-            game['status'] = 'unknown'
-            gamesToRemoveFromGGdealsFile.append(game)
-            with open("docs/titlesToRepair.txt", "a", encoding='utf8') as file: 
-                file.write(f'{game["title"]}\n')
-    removeGameFromGGdealsFile(gamesToRemoveFromGGdealsFile)
+            game['status'] = 'deleted'
+            removeGame(game['id'])
     return gamesList
 
 # == OLX ==
@@ -49,21 +35,16 @@ def olxActions(gamesList):
 # automatyzacja zakupów na stronach
 
 def app():
-    # gamesList = getGamesFromGGdeals()
+    gamesList = getGamesFromGGdeals()
     # gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
-    
-    # with open("docs/steamGameList.txt", "w", encoding='utf8') as file: file.write(f'{gamesList}\n')
-    with open("docs/steamGameList.txt", "r", encoding='utf8') as file: 
-        gamesList = literal_eval(file.read())
+    # olxActions(gamesList)
 
-    olxActions(gamesList)
+app()
 
 # Zrobić nieskończoną pętlę:
 # 1. Wywołanie app()
 # 2. Kilkukrotne sprawdzenie zakupów (co 5-10 minut)
 #   a) Wywołanie auto-zakupu
-
-app()
 
 # get city, categories
 # For list of available categories, attributes, cities please check out appropriate endpoint references like /api/partner/categories, /api/partner/cities and so on.
