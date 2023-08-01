@@ -1,4 +1,4 @@
-from backend.getInformation.database.databaseActions import removeAdvert, getAdvertID
+from backend.database.databaseActions import removeAdvert, getAdvertID
 from requests import delete
 
 def removeAuction(game, headers):

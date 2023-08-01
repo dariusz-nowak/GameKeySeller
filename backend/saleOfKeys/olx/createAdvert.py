@@ -1,5 +1,5 @@
 from backend.saleOfKeys.olx.advertsActions import createAdvertData, priceDetermination
-from backend.getInformation.database.databaseActions import addAdvert
+from backend.database.databaseActions import addAdvert
 from requests import post
 
 def createAuction(game, header):

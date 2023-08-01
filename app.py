@@ -1,5 +1,5 @@
-from backend.server.server_script import run_server
-from backend.getInformation.database.databaseActions import removeGame
+from backend.server.server import run_server
+from backend.database.databaseActions import removeGame
 from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames
 from backend.getInformation.steam.steamGetGameInfo import getGameInfo
 from backend.getInformation.steam.exceptions import checkException
@@ -49,8 +49,8 @@ def app():
 
     olxActions(gamesList)
     
-run_server()
-
+# run_server()
+print('te')
 # while True:
 #     app()
 #     break

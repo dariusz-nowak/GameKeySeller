@@ -8,10 +8,15 @@
     "liveServer.settings.donotShowInfoMsg": true,
     "liveServer.settings.proxy": {
         "enable": true,
-        "baseUri": "/backend/server",
-        "proxyUri": "http://localhost:8000/backend/server"
+        "baseUri": "/api",
+        "proxyUri": "http://localhost:8000/api"
     },
     "editor.codeActionsOnSave": {
         
-    }
+    },
+    "workbench.editorAssociations": {
+        "*.db": "sqlite-viewer.option"
+    },
+    "editor.language.brackets": [],
+    "editor.indentSize": "tabSize"
 }

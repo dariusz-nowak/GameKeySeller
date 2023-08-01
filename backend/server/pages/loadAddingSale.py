@@ -1,0 +1,6 @@
+def loadAddingSale():
+    pass
+
+_ = """
+
+"""

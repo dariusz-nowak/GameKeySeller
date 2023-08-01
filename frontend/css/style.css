@@ -8,9 +8,9 @@ body {
     max-height: 100vh;
     overflow: hidden;
 }
-/* .todo {
+.todo {
     color: red;
-} */
+}
 .content {
     display: flex;
     height: 100vh;
@@ -53,7 +53,7 @@ body {
     margin-bottom: 30px;
     background-color: #555;
 }
-.content .data {
+.content .container {
     flex-basis: calc(100% - 250px);
     padding: 25px;
     background-color: #222;

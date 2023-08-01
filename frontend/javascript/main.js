@@ -1,27 +1,25 @@
-data_section = document.querySelector('.content .data')
+data_section = document.querySelector('.content .container')
 
-function runPythonScript() {
-    // Wywołanie skryptu Pythona na serwerze przy użyciu Fetch API
-    fetch('/backend/server/server_script')
-        .then(response => response.text())
-        .then(result => {
-            console.log(result); // Wyświetlenie wyniku działania skryptu Pythona w alert'cie
-        })
-        .catch(error => {
-            console.error('Wystąpił błąd:', error);
-        });
+document.querySelectorAll('.prevent-default').forEach(e => e.preventDefault());
+
+async function loadPageHTML(page) {
+    try {
+        const response = await fetch('/api/' + page);
+        const result = await response.text();
+        return result;
+    } catch (error) {
+        console.error('Wystąpił błąd:', error);
+        return null; // lub możesz zwrócić inny odpowiedni komunikat błędu
+    }
+}
+    
+async function loadPage(page) {
+    try {
+        const result = await loadPageHTML(page);
+        data_section.innerHTML = result
+    } catch (error) {
+        console.error('Wystąpił błąd:', error);
+    }
 }
 
-runPythonScript()
-
-function loadPage(page) {
-
-    runPythonScript()
-
-    // Stworzyć dane z wykorzystanie AJAX i GET
-    // Zapisać dane w pliku JSON lub zwrócić w tej postaci
-    // Wczytać dane do kreatora treści strony
-
-    // if (page == 'index') data_section.innerHTML = createHomepage()
-    // else if (page == '') data_section.innerHTML = createHomepage()
-}
+// loadPage('index')

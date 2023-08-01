@@ -1,4 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from pages.loadIndex import loadIndex
+from pages.loadAddingSale import loadAddingSale
+from pages.saveSale import saveSale
+
+routes = ['/api/index', '/api/adding-sale', '/api/add-sale']
 
 def run_python_script():
     # Tutaj można umieścić dowolny kod Pythona, który chcesz wykonać po stronie serwera
@@ -7,8 +12,11 @@ def run_python_script():
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/backend/server/server_script':
-            result = run_python_script()
+        if self.path in routes:
+            if self.path == '/api/index': result = loadIndex()
+            elif self.path == '/api/adding-sale': result = loadAddingSale()
+            elif self.path.startswith('/api/adding-sale'): result = saveSale(self)
+            
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
@@ -22,8 +30,6 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
 def run_server():
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, SimpleRequestHandler)
-    print('Serwer działa na porcie 8000...')
     httpd.serve_forever()
 
-if __name__ == '__main__':
-    run_server()
+run_server()

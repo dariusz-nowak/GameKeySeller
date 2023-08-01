@@ -1,4 +1,4 @@
-from backend.getInformation.database.databaseActions import loadGamesList, editGamesList
+from backend.database.databaseActions import loadGamesList, editGamesList
 from requests import get
 from bs4 import BeautifulSoup
 from time import sleep
