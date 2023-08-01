@@ -1,3 +1,4 @@
+from backend.server.server_script import run_server
 from backend.getInformation.database.databaseActions import removeGame
 from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames
 from backend.getInformation.steam.steamGetGameInfo import getGameInfo
@@ -47,8 +48,12 @@ def app():
         gamesList = literal_eval(file.read())
 
     olxActions(gamesList)
+    
+run_server()
 
-app()
+# while True:
+#     app()
+#     break
 
 # Zrobić nieskończoną pętlę:
 # 1. Wywołanie app()

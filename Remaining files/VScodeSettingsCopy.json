@@ -1,0 +1,17 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/backend/server",
+        "proxyUri": "http://localhost:8000/backend/server"
+    },
+    "editor.codeActionsOnSave": {
+        
+    }
+}
