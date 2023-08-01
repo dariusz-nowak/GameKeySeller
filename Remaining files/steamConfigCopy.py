@@ -50,17 +50,16 @@ class Apps:
                 string_id = l["data-ds-appid"]
                 href = l["href"].replace("\\", "").replace('"', "")
                 app["id"] = string_id.replace("\\", "").replace('"', "")
+
                 if app['id'].isnumeric(): app['id'] = int(app['id'])
                 else: app['id'] = int(app['id'][0:app['id'].index(',')])
+                
                 app["link"] = href
                 divs = l.select("div")
                 for div in divs:
-                    if div["class"][0] == '\\"match_name\\"':
-                        app["name"] = div.text
-                    if div["class"][0] == '\\"match_price\\"':
-                        app["price"] = div.text
-                    if div["class"][0] == '\\"match_img\\"':
-                        app["img"] = div.img["src"].replace("\\", "").replace('"', "")
+                    if div["class"][0] == '\\"match_name\\"': app["name"] = div.text
+                    if div["class"][0] == '\\"match_price\\"': app["price"] = div.text
+                    if div["class"][0] == '\\"match_img\\"': app["img"] = div.img["src"].replace("\\", "").replace('"', "")
                 break
         return app
 

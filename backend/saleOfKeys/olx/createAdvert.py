@@ -7,8 +7,9 @@ def createAuction(game, header):
     
     addAdvert({
         'id': advert['id'],
+        'game id': game['id'],
         'title': advert['title'],
-        'image': game['image'][0],
-        'price': priceDetermination(game['current price'], game['old price']),
+        'image': advert['images'][0]['url'],
+        'price': advert['price']['value'],
         'url': advert['url'],
     })

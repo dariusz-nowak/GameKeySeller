@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel zarządzania</title>
     <link rel="stylesheet" href="frontend/css/style.css">
-    <script src="frontend/javascript/main.js"></script>
 </head>
 <body>
     <div class="content">
@@ -13,7 +12,7 @@
             <div class="list">
                 <h2>Raporty</h2>
                 <ul>
-                    <li class="todo" onclick="postData()">Strona główna</li>
+                    <li class="todo" onclick="loadPage('index')">Strona główna</li>
                     <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
                     <li class="todo">Sprzedaż</li>
                     <!-- Zakup per gra/gry oraz per czas -->
@@ -61,6 +60,10 @@
             </div>
         </div>
         <div class="data"></div>
+    </div>
+    <div class="scripts">
+        <script src="frontend/javascript/pages/homepage.js"></script>
+        <script src="frontend/javascript/main.js"></script>
     </div>
 </body>
 </html>

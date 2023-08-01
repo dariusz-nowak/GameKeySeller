@@ -1,5 +1,5 @@
-from ast import literal_eval
 from steam import Steam
+from ast import literal_eval
 from re import compile, sub
 from time import sleep
 

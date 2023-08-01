@@ -44,14 +44,18 @@ def editGamesList(gamesList):
 
     return gamesList
 
-def getAdvertID(advertID):
-    pass
+def getAdvertID(gameID):
+    return cursor.execute(f"SELECT id FROM adverts WHERE game_id = {gameID}")
 
 def addAdvert(advert):
-    pass
+    title = advert['title'].replace('\'', '`')
+    cursor.execute(f"INSERT INTO adverts VALUES(null, {advert['game id']}, '{title}', '{advert['image']}', {advert['price']}, '{advert['url']}')")
+    connection.commit()
 
 def editAdvert(advert):
-    pass
+    cursor.execute(f"UPDATE adverts SET price = {advert['price']} WHERE id = {advert['id']}")
+    connection.commit()
 
 def removeAdvert(advertID):
-    pass
+    cursor.execute(f"DELETE FROM adverts WHERE id = {advertID}")
+    connection.commit()

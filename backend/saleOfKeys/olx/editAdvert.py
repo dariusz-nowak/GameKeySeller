@@ -7,8 +7,5 @@ def editAuction(game, headers):
     
     editAdvert({
         'id': advert['id'],
-        'title': advert['title'],
-        'image': game['image'][0],
-        'price': priceDetermination(game['current price'], game['old price']),
-        'url': advert['url'],
+        'price': advert['price']['value'],
     })
