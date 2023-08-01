@@ -48,15 +48,16 @@ def checkExistingGamesInList(newGamesList, existingGamesList):
 
         for existingGame in existingGamesList:
             if newGame['title'] == existingGame['title']:
-                if newGame['current price'] != existingGame['current price']:
-                    newGame['id'] = existingGame['id']
-                    newGame['status'] = 'different price'
-                    existingGamesList.remove(existingGame)
-                    break
+                newGame['id'] = existingGame['id']
+
+                if newGame['current price'] != existingGame['current price']: newGame['status'] = 'different price'
                 else: newGame['status'] = 'no changes'
                 
+                existingGamesList.remove(existingGame)
+                break
+                
     for remainingGame in existingGamesList:
-        remainingGame['status'] = 'no changes'
+        remainingGame['status'] = 'deleted'
         newGamesList.append(remainingGame)
 
     return newGamesList

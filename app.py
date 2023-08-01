@@ -7,6 +7,7 @@ from backend.saleOfKeys.olx.advertsActions import oAuthHeader
 from backend.saleOfKeys.olx.createAdvert import createAuction
 from backend.saleOfKeys.olx.editAdvert import editAuction
 from backend.saleOfKeys.olx.removeAdvert import removeAuction
+from ast import literal_eval
 
 # == GG.DEALS ==
 def getGamesFromGGdeals():
@@ -36,7 +37,15 @@ def olxActions(gamesList):
 
 def app():
     gamesList = getGamesFromGGdeals()
-    # gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
+    gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
+
+
+    with open("gamesList.txt", "w") as file:
+        file.write(str(gamesList))
+    # with open("gamesList.txt", "r") as file:
+    #     gamesList = literal_eval(file.read())
+
+
     # olxActions(gamesList)
 
 app()
@@ -45,7 +54,6 @@ app()
 # 1. Wywołanie app()
 # 2. Kilkukrotne sprawdzenie zakupów (co 5-10 minut)
 #   a) Wywołanie auto-zakupu
-
 # get city, categories
 # For list of available categories, attributes, cities please check out appropriate endpoint references like /api/partner/categories, /api/partner/cities and so on.
 # You can get list of required attributes by /api/partner/categories/ID/attributes endpoint where ID is the category ID you choosed. Endpoint return list of required and optional attributes to create advert - attributes vary in different countries and categories.

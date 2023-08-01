@@ -5,13 +5,15 @@ from ast import literal_eval
 connection = connect("backend/database/sql.db")
 cursor = connection.cursor()
 
+now = "strftime('%Y-%m-%d %H:%M:%S','now', '+2 hours')"
+
 def addGame(game):
     title = game['title'].replace('\'', '`')
-    cursor.execute(f"INSERT INTO games VALUES(null, '{title}', {game['old price']}, {game['current price']}, '{game['store']}', '{game['status']}', strftime('%Y-%m-%d %H-%M-%S','now'), strftime('%Y-%m-%d %H-%M-%S','now'))")
+    cursor.execute(f"INSERT INTO games VALUES(null, '{title}', {game['old price']}, {game['current price']}, '{game['store']}', '{game['status']}', {now}, {now})")
     connection.commit()
 
 def editGame(game):
-    cursor.execute(f"UPDATE games SET old_price = {game['old price']}, current_price = {game['current price']}, status = '{game['status']}', time_modyfied = strftime('%Y-%m-%d %H-%M-%S','now') WHERE id = {game['id']}")
+    cursor.execute(f"UPDATE games SET old_price = {game['old price']}, current_price = {game['current price']}, status = '{game['status']}', time_modyfied = {now} WHERE id = {game['id']}")
     connection.commit()
 
 def removeGame(gameID):
@@ -42,7 +44,7 @@ def editGamesList(gamesList):
 
     return gamesList
 
-def getAdvertID(gameID):
+def getAdvertID(advertID):
     pass
 
 def addAdvert(advert):
@@ -51,5 +53,5 @@ def addAdvert(advert):
 def editAdvert(advert):
     pass
 
-def removeAdvert(gameID):
+def removeAdvert(advertID):
     pass
