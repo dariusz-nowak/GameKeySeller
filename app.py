@@ -37,7 +37,6 @@ def olxActions(gamesList):
 # automatyzacja zakupów na stronach
 
 def app():
-    print('afaf')
     gamesList = getGamesFromGGdeals()
     gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
 

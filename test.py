@@ -1,12 +1,3 @@
-i = { 
-    "images": [
-        {
-        "url": "https://www.olx.pl/advert-picture-1.jpg"
-        },
-        {
-        "url": "https://www.olx.pl/advert-picture-2.jpg"
-        }
-  ]
-}
+x = "2023-08-02 15:26:08"
 
-print(i['images'][0]['url'])
+print(x[5:7])

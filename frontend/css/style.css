@@ -63,12 +63,39 @@ body {
 .content .homepage {
     display: flex;
     flex-wrap: wrap;
-    height: 100%;
 }
 .content .homepage > div {
-    flex-basis: 50%;
+    max-width: 50%;
     align-self: center;
     text-align: center;
+}
+.content .homepage .sale-this-month h1 {
+    margin-bottom: 20px;
+}
+.content .homepage .sale-this-month .days {
+    display: flex;
+    flex-direction: column;
+}
+.content .homepage .sale-this-month .days .day {
+    display: flex;
+    height: 12px;
+}
+.content .homepage .sale-this-month .days .day .date {
+    display: block;
+    width: 45px;
+    line-height: 12px;
+}
+.content .homepage .sale-this-month .days .day .grapf {
+    display: block;
+    height: 10px;
+    margin: 1px 0;
+    padding: 0 2px;
+    background-color: cornflowerblue;
+}
+.content .homepage .sale-this-month .days .day .value {
+    display: block;
+    margin-left: 5px;
+    line-height: 12px;
 }
 .content .container .adding-sale {
     position: relative;

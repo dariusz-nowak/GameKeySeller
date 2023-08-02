@@ -1,5 +1,4 @@
 from sqlite3 import connect
-from ast import literal_eval
 
 connection = connect("backend/database/sql.db")
 cursor = connection.cursor()
@@ -40,7 +39,7 @@ def editGamesList(gamesList):
     for game in gamesList:
         if game['status'] == 'new': addGame(game)
         elif game['status'] in ['different price', 'no changes']: editGame(game)
-        elif game['status'] == 'deleted': removeGame(game['id'])
+        elif game['status'] == 'deleted': removeGame(game['id'], game['title'])
 
     return gamesList
 
@@ -63,3 +62,16 @@ def removeAdvert(advertID):
 def addSale(sale):
     cursor.execute(f"INSERT INTO sales VALUES(null, '{sale['title']}', {sale['buy price']}, {sale['sell price']}, '{sale['platform']}', {now})")
     connection.commit()
+
+def loadMonthSales():
+    salesList = []
+    sales = cursor.execute("SELECT sell_price, time_created FROM sales WHERE time_created >= strftime('%Y-%m','now', '+2 hours')").fetchall()
+
+    for sale in sales:
+        salesList.append({
+            'sell price': sale[0],
+            'month': int(sale[1][5:7]),
+            'day': int(sale[1][8:10])
+        })
+
+    return salesList
