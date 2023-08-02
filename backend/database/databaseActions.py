@@ -15,8 +15,9 @@ def editGame(game):
     cursor.execute(f"UPDATE games SET old_price = {game['old price']}, current_price = {game['current price']}, status = '{game['status']}', time_modyfied = {now} WHERE id = {game['id']}")
     connection.commit()
 
-def removeGame(gameID):
+def removeGame(gameID, title):
     cursor.execute(f"DELETE FROM games WHERE id = {gameID}")
+    cursor.execute(f"INSERT INTO games_to_repair VALUES(null, '{title}')")
     connection.commit()
 
 def loadGamesList():

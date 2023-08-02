@@ -1,8 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
 from pages.loadIndex import loadIndex
 from pages.loadAddingSale import loadAddingSale
 from pages.saveSale import saveSale
-from redirect import redirect
+from server.redirect import redirect
 
 routes = ['/api/index', '/api/adding-sale', '/api/add-sale']
 

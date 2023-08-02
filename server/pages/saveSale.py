@@ -1,8 +1,8 @@
 from urllib.parse import parse_qs, urlparse
 
 import sys, os
-sys.path.append(f"{os.getcwd()}/backend")
-from database.databaseActions import addSale
+sys.path.append(f"{os.getcwd()}")
+from backend.database.databaseActions import addSale
 
 def saveSale(self):
     query_params = parse_qs(urlparse(self.path).query)

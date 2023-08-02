@@ -1,4 +1,3 @@
-from backend.server.server import run_server
 from backend.database.databaseActions import removeGame
 from backend.getInformation.ggDeals.ggDealsCheckGames import checkGames
 from backend.getInformation.steam.steamGetGameInfo import getGameInfo
@@ -21,7 +20,7 @@ def getDataFromSteam(gamesList, exclusionsList):
         try: game.update(getGameInfo(checkException(game['title']))) == 1
         except UnboundLocalError: 
             game['status'] = 'deleted'
-            removeGame(game['id'])
+            removeGame(game['id'], game['title'])
     return gamesList
 
 # == OLX ==
@@ -38,6 +37,7 @@ def olxActions(gamesList):
 # automatyzacja zakupów na stronach
 
 def app():
+    print('afaf')
     gamesList = getGamesFromGGdeals()
     gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
 
@@ -49,11 +49,9 @@ def app():
 
     # olxActions(gamesList)
     
-# run_server()
 
-while True:
-    app()
-    break
+app()
+# run_server()
 
 # Zrobić nieskończoną pętlę:
 # 1. Wywołanie app()
