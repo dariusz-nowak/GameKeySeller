@@ -1,7 +1,5 @@
 data_container = document.querySelector('.content .container')
 
-document.querySelectorAll('.prevent-default').forEach(e => e.preventDefault());
-
 async function loadPageHTML(page) {
     try {
         const response = await fetch('/api/' + page);
@@ -22,4 +20,22 @@ async function loadPage(page) {
     }
 }
 
-// loadPage('index')
+// Sprawdzenie wystąpienia alertu
+const urlParams = new URLSearchParams(window.location.search);
+const alertMessage = urlParams.get('alert');
+if (alertMessage) data_container.innerHTML = alertMessage.slice(2, -1).replace(/\\n/g, '\n')
+
+// Sprawdzenie polskich znaków w formularzu
+function checkForm() {
+    var title = document.getElementById("title").value;
+    var platform = document.getElementById("platform").value;
+    var polishCharactersPattern = /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/;
+
+    if (polishCharactersPattern.test(title) || polishCharactersPattern.test(platform)) {
+        alert("Pola zawierają polskie znaki. Proszę poprawić dane przed wysłaniem formularza.");
+        return false;
+    }
+    return true;
+}
+
+loadPage('index')

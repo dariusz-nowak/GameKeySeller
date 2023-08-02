@@ -38,22 +38,22 @@ def olxActions(gamesList):
 # automatyzacja zakupów na stronach
 
 def app():
-    # gamesList = getGamesFromGGdeals()
-    # gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
+    gamesList = getGamesFromGGdeals()
+    gamesList['new'] = getDataFromSteam(gamesList['new'], checkExclusions())
 
-    # with open("gamesList.txt", "w", encoding="utf-8") as file:
-    #     file.write(str(gamesList))
+    with open("gamesList.txt", "w", encoding="utf-8") as file:
+        file.write(str(gamesList))
 
-    with open("gamesList.txt", "r", encoding="utf-8") as file:
-        gamesList = literal_eval(file.read())
+    # with open("gamesList.txt", "r", encoding="utf-8") as file:
+    #     gamesList = literal_eval(file.read())
 
-    olxActions(gamesList)
+    # olxActions(gamesList)
     
 # run_server()
-print('te')
-# while True:
-#     app()
-#     break
+
+while True:
+    app()
+    break
 
 # Zrobić nieskończoną pętlę:
 # 1. Wywołanie app()

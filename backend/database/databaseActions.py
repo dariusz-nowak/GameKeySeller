@@ -1,4 +1,3 @@
-
 from sqlite3 import connect
 from ast import literal_eval
 
@@ -58,4 +57,8 @@ def editAdvert(advert):
 
 def removeAdvert(advertID):
     cursor.execute(f"DELETE FROM adverts WHERE id = {advertID}")
+    connection.commit()
+
+def addSale(sale):
+    cursor.execute(f"INSERT INTO sales VALUES(null, '{sale['title']}', {sale['buy price']}, {sale['sell price']}, '{sale['platform']}', {now})")
     connection.commit()

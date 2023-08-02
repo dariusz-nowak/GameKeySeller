@@ -70,3 +70,45 @@ body {
     align-self: center;
     text-align: center;
 }
+.content .container .adding-sale {
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    margin: 20px;
+    padding: 35px 45px;
+    background-color: #333;
+}
+.content .container .adding-sale h1 {
+    font-size: 34px;
+}
+.content .container .adding-sale form {
+    margin: 40px 0;
+}
+.content .container .adding-sale form div {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+.content .container .adding-sale form div label {
+    font-size: 18px;
+    line-height: 30px;
+}
+.content .container .adding-sale form div input {
+    width: 200px;
+}
+.content .container .adding-sale form input.submit {
+    width: calc(100% - 10px);
+    height: 40px;
+    background-color: #fff;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: .4s;
+}
+.content .container .adding-sale form input.submit:hover {
+    background-color: #aaa;
+}
