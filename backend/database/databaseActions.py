@@ -20,9 +20,8 @@ def removeGame(gameID, title):
     connection.commit()
 
 def loadGamesList():
-    gamesList = []
     gamesFromDB = cursor.execute("SELECT * FROM games").fetchall()
-
+    gamesList = []
     for game in gamesFromDB:
         gamesList.append({
             'id': game[0],
@@ -32,7 +31,6 @@ def loadGamesList():
             'store': game[4],
             'status': game[5],
         })
-
     return gamesList
 
 def editGamesList(gamesList):
@@ -64,14 +62,24 @@ def addSale(sale):
     connection.commit()
 
 def loadMonthSales():
+    sales = cursor.execute("SELECT title, sell_price, time_created, platform FROM sales WHERE time_created >= strftime('%Y-%m','now') ORDER BY time_created DESC").fetchall()
     salesList = []
-    sales = cursor.execute("SELECT sell_price, time_created FROM sales WHERE time_created >= strftime('%Y-%m','now', '+2 hours')").fetchall()
-
     for sale in sales:
         salesList.append({
-            'sell price': sale[0],
-            'month': int(sale[1][5:7]),
-            'day': int(sale[1][8:10])
+            'title': sale[0],
+            'sell price': sale[1],
+            'month': int(sale[2][5:7]),
+            'day': int(sale[2][8:10]),
+            'platform': sale[3]
         })
+    return salesList
 
+def loadPopularSales(type):
+    sales = cursor.execute(f"SELECT {type}, COUNT({type}) FROM sales GROUP BY {type} ORDER BY COUNT({type}) DESC LIMIT 10").fetchall()
+    salesList = []
+    for sale in sales:
+        salesList.append({
+            'title': sale[0],
+            'count': sale[1]
+        })
     return salesList

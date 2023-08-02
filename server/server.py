@@ -17,6 +17,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(result.encode('utf-8'))
+            
         elif self.path.startswith('/api/adding-sale'): redirect(saveSale(self))
         else:
             self.send_response(404)

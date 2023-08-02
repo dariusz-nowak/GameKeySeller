@@ -62,7 +62,7 @@ body {
 }
 .content .homepage {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .content .homepage > div {
     max-width: 50%;
@@ -78,16 +78,17 @@ body {
 }
 .content .homepage .sale-this-month .days .day {
     display: flex;
-    height: 12px;
+    margin: 1px 0;
+    height: 25px;
 }
 .content .homepage .sale-this-month .days .day .date {
     display: block;
     width: 45px;
-    line-height: 12px;
+    line-height: 25px;
 }
 .content .homepage .sale-this-month .days .day .grapf {
     display: block;
-    height: 10px;
+    height: 24px;
     margin: 1px 0;
     padding: 0 2px;
     background-color: cornflowerblue;
@@ -95,8 +96,9 @@ body {
 .content .homepage .sale-this-month .days .day .value {
     display: block;
     margin-left: 5px;
-    line-height: 12px;
+    line-height: 25px;
 }
+/*  */
 .content .container .adding-sale {
     position: relative;
     top: 40%;
