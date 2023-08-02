@@ -7,7 +7,7 @@ def loadIndex():
         <div class="most-popular-pages">Najpopularniejsze (3-5) strony</div>
     """
 
-    html = '<div class="homepage">'
+    html = '<div class="homepage">index'
 
 
     # Sprzedaż aktualny miesiąc lub ostatnie 30 dni
@@ -50,7 +50,7 @@ def loadIndex():
     html += '</div>'
     return html
 
-_ = """
+a = """
     <div class="sale-this-month">
         <div class="homepage"><div class="sale-this-month">
             <div class="data">

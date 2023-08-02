@@ -1,22 +1,7 @@
 {
-    "workbench.colorTheme": "Default Dark Modern",
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "git.enableSmartCommit": true,
-    "git.confirmSync": false,
-    "git.autofetch": true,
-    "liveServer.settings.donotShowInfoMsg": true,
     "liveServer.settings.proxy": {
         "enable": true,
         "baseUri": "/api",
-        "proxyUri": "http://localhost:8000/api"
-    },
-    "editor.codeActionsOnSave": {
-        
-    },
-    "workbench.editorAssociations": {
-        "*.db": "sqlite-viewer.option"
-    },
-    "editor.language.brackets": [],
-    "editor.indentSize": "tabSize"
+        "proxyUri": "http://localhost:8080/api"
+    }
 }

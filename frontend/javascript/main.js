@@ -1,4 +1,4 @@
-data_section = document.querySelector('.content .container')
+data_container = document.querySelector('.content .container')
 
 document.querySelectorAll('.prevent-default').forEach(e => e.preventDefault());
 
@@ -16,7 +16,7 @@ async function loadPageHTML(page) {
 async function loadPage(page) {
     try {
         const result = await loadPageHTML(page);
-        data_section.innerHTML = result
+        data_container.innerHTML = result
     } catch (error) {
         console.error('Wystąpił błąd:', error);
     }

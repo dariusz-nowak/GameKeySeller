@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pages.loadIndex import loadIndex
 from pages.loadAddingSale import loadAddingSale
 from pages.saveSale import saveSale
+from urllib.parse import parse_qs, urlparse
 
 routes = ['/api/index', '/api/adding-sale', '/api/add-sale']
 
@@ -12,6 +13,9 @@ def run_python_script():
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        print(self.path.startswith('/api/adding-sale'))
+        print(self.path)
+        print(parse_qs(urlparse(self.path).query))
         if self.path in routes:
             if self.path == '/api/index': result = loadIndex()
             elif self.path == '/api/adding-sale': result = loadAddingSale()
@@ -28,7 +32,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(b'Nie znaleziono strony')
 
 def run_server():
-    server_address = ('', 8000)
+    server_address = ('', 8080)
     httpd = HTTPServer(server_address, SimpleRequestHandler)
     httpd.serve_forever()
 
