@@ -120,9 +120,23 @@ body {
 .content .homepage .last-and-popular .titles > .title,
 .content .homepage .last-and-popular .platforms > .platform {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     padding: 10px 25px;
     border-top: 1px solid rgba(255,255,255,.4);
+}
+.content .homepage .last-and-popular .sales .sale .title {
+    flex-basis: 60%
+}
+.content .homepage .last-and-popular .titles .title .title, 
+.content .homepage .last-and-popular .platforms .platform .platform {
+    flex-basis: 80%
+}
+.content .homepage .last-and-popular .sales .sale .price, 
+.content .homepage .last-and-popular .sales .sale .platform,
+.content .homepage .last-and-popular .platforms .platform .count,
+.content .homepage .last-and-popular .titles .title .count {
+    width: 20%;
+    text-align: center;
 }
 .content .container .adding-sale {
     position: relative;

@@ -67,7 +67,7 @@ def loadIndex():
         html += """
             <div class="title">
                 <span class="title">{}</span>
-                <span class="count">Sprzedaż {}</span>
+                <span class="count">Sprzedaż: {} szt.</span>
             </div>
         """.format(title['title'], title['count'])
     html += "</div></div>"
@@ -81,7 +81,7 @@ def loadIndex():
         html += """
             <div class="platform">
                 <span class="platform">{}</span>
-                <span class="count">Zakup {}</span>
+                <span class="count">Zakup: {} szt.</span>
             </div>
         """.format(platform['title'], platform['count'])
     html += "</div></div>"
