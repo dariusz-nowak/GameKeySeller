@@ -50,12 +50,3 @@ def app():
     
 
 app()
-# run_server()
-
-# Zrobić nieskończoną pętlę:
-# 1. Wywołanie app()
-# 2. Kilkukrotne sprawdzenie zakupów (co 5-10 minut)
-#   a) Wywołanie auto-zakupu
-# get city, categories
-# For list of available categories, attributes, cities please check out appropriate endpoint references like /api/partner/categories, /api/partner/cities and so on.
-# You can get list of required attributes by /api/partner/categories/ID/attributes endpoint where ID is the category ID you choosed. Endpoint return list of required and optional attributes to create advert - attributes vary in different countries and categories.

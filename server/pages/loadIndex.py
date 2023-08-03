@@ -31,7 +31,7 @@ def loadIndex():
     for day in days: 
         if bestSale < days[str(day)]: bestSale = days[str(day)]
         
-    html += f'<div class="sale-this-month"><h1>Sprzedaż w miesiącu: {monthSale} zł</h1><div class="days">'
+    html += f'<div class="sale-this-month"><h1>Sprzedaż w miesiącu: {monthSale:.2f} zł</h1><div class="days">'
     for day in days:
         html += """
             <div class="day">
@@ -39,7 +39,11 @@ def loadIndex():
                 <span class="grapf" style="width: {}px{}"></span>
                 <span class="value">{}</span>
             </div>
-        """.format(day, currentMonth, (days[str(day)] / bestSale) * 600, '; background-color: darkolivegreen' if int(currentDay) == int(day) else '', f'{days[str(day)]} zł' if days[str(day)] > 0 else '')
+        """.format(day if len(str(day)) == 2 else f"0{day}", 
+                   day if len(str(currentMonth)) == 2 else f"0{currentMonth}", 
+                   (days[str(day)] / bestSale) * 600, 
+                   '; background-color: darkolivegreen' if int(currentDay) == int(day) else '', 
+                   f'{days[str(day)]:.2f} zł' if days[str(day)] > 0 else '')
     html += "</div></div>"
     
     # Ostatnio sprzedane (3-5) produkty
@@ -54,7 +58,9 @@ def loadIndex():
                 <span class="price">{} zł</span>
                 <span class="platform">{}</span>
             </div>
-        """.format(sale['title'], sale['sell price'], sale['platform'])
+        """.format(sale['title'], 
+                   f"{sale['sell price']:.2f}", 
+                   sale['platform'])
     html += '</div></div>'
     
     # Najpopularniejsze (3-5) gry
@@ -69,7 +75,8 @@ def loadIndex():
                 <span class="title">{}</span>
                 <span class="count">Sprzedaż: {} szt.</span>
             </div>
-        """.format(title['title'], title['count'])
+        """.format(title['title'], 
+                   title['count'])
     html += "</div></div>"
     
     # Najpopularniejsze (3-5) strony
@@ -83,7 +90,8 @@ def loadIndex():
                 <span class="platform">{}</span>
                 <span class="count">Zakup: {} szt.</span>
             </div>
-        """.format(platform['title'], platform['count'])
+        """.format(platform['title'], 
+                   platform['count'])
     html += "</div></div>"
     html += "</div></div></div></div>"
     return html

@@ -15,6 +15,7 @@ def editGame(game):
     connection.commit()
 
 def removeGame(gameID, title):
+    title = title.replace('\'', '`')
     cursor.execute(f"DELETE FROM games WHERE id = {gameID}")
     cursor.execute(f"INSERT INTO games_to_repair VALUES(null, '{title}')")
     connection.commit()
@@ -38,7 +39,6 @@ def editGamesList(gamesList):
         if game['status'] == 'new': addGame(game)
         elif game['status'] in ['different price', 'no changes']: editGame(game)
         elif game['status'] == 'deleted': removeGame(game['id'], game['title'])
-
     return gamesList
 
 def getAdvertID(gameID):

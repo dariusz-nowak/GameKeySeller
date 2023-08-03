@@ -5,10 +5,11 @@ from pages.loadAddingSale import loadAddingSale
 from pages.saveSale import saveSale
 from redirect import redirect
 
-import os
-import signal
+import threading
 
-serverDown = False
+server_running = True
+httpd = None
+
 routes = ['/api/index', '/api/adding-sale', '/api/add-sale']
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
