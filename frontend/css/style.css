@@ -62,9 +62,8 @@ body {
 }
 .content .homepage {
     display: flex;
-    justify-content: space-between;
 }
-.content .homepage > div {
+.content .homepage > .sale-this-month {
     max-width: 50%;
     align-self: center;
     text-align: center;
@@ -78,18 +77,19 @@ body {
 }
 .content .homepage .sale-this-month .days .day {
     display: flex;
-    margin: 1px 0;
-    height: 25px;
+    height: 28px;
+    border-top: 1px solid rgba(255,255,255,.4);
+    border-bottom: 1px solid rgba(255,255,255,.4);
 }
 .content .homepage .sale-this-month .days .day .date {
     display: block;
     width: 45px;
-    line-height: 25px;
+    line-height: 28px;
 }
 .content .homepage .sale-this-month .days .day .grapf {
     display: block;
-    height: 24px;
-    margin: 1px 0;
+    height: 20px;
+    margin: 3px 0;
     padding: 0 2px;
     background-color: cornflowerblue;
 }
@@ -98,7 +98,32 @@ body {
     margin-left: 5px;
     line-height: 25px;
 }
-/*  */
+.content .homepage .last-and-popular {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+.content .homepage .last-and-popular > div {
+    border: 1px solid rgba(255,255,255,.4);
+    margin-bottom: 40px;
+    background-color: #333;
+}
+.content .homepage .last-and-popular h1 {
+    text-align: center;
+    padding: 25px 0;
+    background-color: #444;
+}
+.content .homepage .last-and-popular .sales .sale,
+.content .homepage .last-and-popular .titles > .title,
+.content .homepage .last-and-popular .platforms > .platform {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
+    border-top: 1px solid rgba(255,255,255,.4);
+}
 .content .container .adding-sale {
     position: relative;
     top: 40%;

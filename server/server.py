@@ -5,6 +5,10 @@ from pages.loadAddingSale import loadAddingSale
 from pages.saveSale import saveSale
 from redirect import redirect
 
+import os
+import signal
+
+serverDown = False
 routes = ['/api/index', '/api/adding-sale', '/api/add-sale']
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
@@ -25,9 +29,9 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write('Nie znaleziono strony')
 
-def run_server():
+def runServer():
     server_address = ('', 8080)
     httpd = HTTPServer(server_address, SimpleRequestHandler)
     httpd.serve_forever()
 
-run_server()
+runServer()

@@ -39,11 +39,11 @@ def loadIndex():
                 <span class="grapf" style="width: {}px{}"></span>
                 <span class="value">{}</span>
             </div>
-        """.format(day, currentMonth, (days[str(day)] / bestSale) * 400, '; background-color: darkolivegreen' if int(currentDay) == int(day) else '', f'{days[str(day)]} zł' if days[str(day)] > 0 else '')
+        """.format(day, currentMonth, (days[str(day)] / bestSale) * 600, '; background-color: darkolivegreen' if int(currentDay) == int(day) else '', f'{days[str(day)]} zł' if days[str(day)] > 0 else '')
     html += "</div></div>"
     
     # Ostatnio sprzedane (3-5) produkty
-    html += '<div class="last&popular">'
+    html += '<div class="last-and-popular">'
     html += '<div class="recently-sold">'
     html += '<h1>5 ostatnich sprzedaży</h1>'
     html += '<div class="sales">'
@@ -51,9 +51,7 @@ def loadIndex():
         html += """
             <div class="sale">
                 <span class="title">{}</span>
-                <span>-</span>
                 <span class="price">{} zł</span>
-                <span>-</span>
                 <span class="platform">{}</span>
             </div>
         """.format(sale['title'], sale['sell price'], sale['platform'])
@@ -69,8 +67,7 @@ def loadIndex():
         html += """
             <div class="title">
                 <span class="title">{}</span>
-                <span>-</span>
-                <span class="count">Sprzedaż: {}</span>
+                <span class="count">Sprzedaż {}</span>
             </div>
         """.format(title['title'], title['count'])
     html += "</div></div>"
@@ -84,8 +81,7 @@ def loadIndex():
         html += """
             <div class="platform">
                 <span class="platform">{}</span>
-                <span>-</span>
-                <span class="count">Zakup: {}</span>
+                <span class="count">Zakup {}</span>
             </div>
         """.format(platform['title'], platform['count'])
     html += "</div></div>"

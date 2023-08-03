@@ -14,7 +14,7 @@
             <div class="list">
                 <h2>Raporty</h2>
                 <ul>
-                    <li class="todo" onclick="loadPage('index')">Strona główna</li>
+                    <li onclick="loadPage('index')">Strona główna</li>
                     <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
                     <li class="todo">Sprzedaż</li>
                     <!-- Zakup per gra/gry oraz per czas -->
@@ -49,10 +49,12 @@
             <div class="list">
                 <h2>Serwer</h2>
                 <ul>
-                    <!-- Uruchomienie app() jeśli wyłączony -->
-                    <li class="todo">Uruchom</li>
-                    <!-- Zatrzymanie app() jeśli włączony -->
-                    <li class="todo">Zatzymaj</li>
+                    <!-- Uruchomienie run_server() jeśli wyłączony -->
+                    <li class="todo" onclick="loadPage('start-server')">Uruchom</li>
+                    <!-- Zatrzymanie run_server() jeśli włączony -->
+                    <li class="todo" onclick="loadPage('stop-server')">Zatzymaj</li>
+                    <!-- Restartuj run_server() jeśli włączony -->
+                    <li class="todo" onclick="loadPage('restart-server')">Restart</li>
                 </ul>
             </div>
             <div class="server-status">
