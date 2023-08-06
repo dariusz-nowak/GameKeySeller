@@ -24,6 +24,7 @@ async function loadPage(page) {
 const urlParams = new URLSearchParams(window.location.search);
 const alertMessage = urlParams.get('alert');
 if (alertMessage) data_container.innerHTML = alertMessage.slice(2, -1).replace(/\\n/g, '\n')
+else if (!alertMessage && window.location.pathname == '/') loadPage('index')
 
 // Sprawdzenie polskich znaków w formularzu
 function checkForm() {
@@ -37,5 +38,3 @@ function checkForm() {
     }
     return true;
 }
-
-loadPage('index')

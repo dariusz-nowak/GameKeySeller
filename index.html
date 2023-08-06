@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel zarządzania</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
     <link rel="stylesheet" href="frontend/css/style.css">
 </head>
 <body>
@@ -16,7 +15,7 @@
                 <ul>
                     <li onclick="loadPage('index')">Strona główna</li>
                     <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
-                    <li class="todo">Sprzedaż</li>
+                    <li class="todo" onclick="loadPage('load-sale')">Sprzedaż</li>
                     <!-- Zakup per gra/gry oraz per czas -->
                     <li class="todo">Zakup</li>
                 </ul>
@@ -40,9 +39,11 @@
             </div>
             <div class="separate"></div>
             <div class="list">
-                <h2>Dane</h2>
+                <h2>Działania</h2>
                 <ul>
                     <li onclick="loadPage('adding-sale')">Dodaj sprzedaż</li>
+                    <li onclick="loadPage('adding-purchase-platform')">Dodaj platformę zakupu</li>
+                    <li onclick="loadPage('adding-sales-purchase')">Dodaj platformę sprzedaży</li>
                 </ul>
             </div>
         </div>

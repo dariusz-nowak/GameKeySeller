@@ -58,24 +58,24 @@ def removeAdvert(advertID):
     connection.commit()
 
 def addSale(sale):
-    cursor.execute(f"INSERT INTO sales VALUES(null, '{sale['title']}', {sale['buy price']}, {sale['sell price']}, '{sale['platform']}', {now})")
+    cursor.execute(f"INSERT INTO sales VALUES(null, '{sale['title']}', {sale['buy price']}, {sale['sell price']}, {sale['fee']}, '{sale['purchase platform']}', '{sale['sale platform']}', '{sale['date']}')")
     connection.commit()
 
 def loadMonthSales():
-    sales = cursor.execute("SELECT title, sell_price, time_created, platform FROM sales WHERE time_created >= strftime('%Y-%m','now') ORDER BY time_created DESC").fetchall()
+    sales = cursor.execute("SELECT title, sell_price, buy_price, fee, sell_platform, time_created FROM sales WHERE time_created >= strftime('%Y-%m-%d', 'now', '-31 days') ORDER BY time_created DESC").fetchall()
     salesList = []
     for sale in sales:
         salesList.append({
             'title': sale[0],
-            'sell price': sale[1],
-            'month': int(sale[2][5:7]),
-            'day': int(sale[2][8:10]),
-            'platform': sale[3]
+            'profit': sale[1] - sale[2] - sale[3],
+            'platform': sale[4],
+            'day': sale[5][8:10],
+            'month': sale[5][5:7]
         })
     return salesList
 
 def loadPopularSales(type):
-    sales = cursor.execute(f"SELECT {type}, COUNT({type}) FROM sales GROUP BY {type} ORDER BY COUNT({type}) DESC LIMIT 10").fetchall()
+    sales = cursor.execute(f"SELECT {type}, COUNT({type}) FROM sales GROUP BY {type} ORDER BY COUNT({type}) DESC LIMIT 5").fetchall()
     salesList = []
     for sale in sales:
         salesList.append({
@@ -83,3 +83,20 @@ def loadPopularSales(type):
             'count': sale[1]
         })
     return salesList
+
+def addPurchasePlatform(purchase):
+    cursor.execute(f"INSERT INTO purchase_platforms VALUES(null, '{purchase['platform']}')")
+    connection.commit()
+
+def addSalesPlatform(sale):
+    cursor.execute(f"INSERT INTO sales_platforms VALUES(null, '{sale['platform']}')")
+    connection.commit()
+
+def loadPlatforms(platform): 
+    platforms = cursor.execute(f"SELECT name FROM {platform}").fetchall()
+    platformsList = []
+    for platform in platforms:
+        platformsList.append({
+            'name': platform[0]
+        })
+    return platformsList
