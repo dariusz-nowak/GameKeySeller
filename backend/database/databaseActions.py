@@ -110,8 +110,8 @@ def loadFilteredSales(filters):
         if filters['max fee']: query += f" AND fee <= '{filters['max fee']}'"
         if filters['min sell price']: query += f" AND sell_price >= '{filters['min sell price']}'"
         if filters['max sell price']: query += f" AND sell_price <= '{filters['max sell price']}'"
-        if filters['min profit']: query += f" AND sell_price - buy_price - fee >= '{filters['min profit']}'"
         if filters['min profit']: query += f" AND sell_price - buy_price - fee <= '{filters['min profit']}'"
+        if filters['max profit']: query += f" AND sell_price - buy_price - fee >= '{filters['max profit']}'"
     else:
         query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
     
