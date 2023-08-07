@@ -57,6 +57,6 @@ cursor = connection.cursor()
 # cursor.execute("INSERT INTO sales VALUES(null, 'title', 100, 30, 'platform', strftime('%Y-%m-%d %H:%M:%S','now', '+26 days'))")
 # connection.commit()
 
-# cursor.execute("DELETE FROM sales WHERE id = 2")
+cursor.execute("DELETE FROM purchase_platforms WHERE name = 'Test'")
 # cursor.execute("DELETE FROM games WHERE id = 73")
-# connection.commit()
+connection.commit()

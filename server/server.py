@@ -25,7 +25,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         
         if self.path == '/' or self.path.startswith('/alert'): 
-            result = loadIndex()
+            result = loadIndex('')
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
@@ -45,7 +45,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path in routes:
             if self.path == '/api/index': result = loadHomepage()
             elif self.path == '/api/adding-sale': result = loadAddingSale()
-            elif self.path == '/api/load-sale': result = loadSale('')
+            elif self.path == '/api/load-sale': result = loadSale(False)
             elif self.path == '/api/adding-purchase-platform': result = loadAddingPurchasePlatform()
             elif self.path == '/api/adding-sales-purchase': result = loadAddingSalesPlatform()
             
@@ -55,10 +55,16 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(result.encode('utf-8'))
             
         elif self.path.startswith('/api/adding-sale'): redirect(saveSale(self))
-        elif self.path.startswith('/api/add-purchase-platform'): redirect(savePlatform('purchase', self))
-        elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self))
-        elif self.path.startswith('/api/load-sales-raport'): result = loadSale(self)
-        
+        elif self.path.startswith('/api/add-purchase-platform'): redirect(savePlatform('purchase', self), 'save')
+        elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self), 'save')
+
+        elif self.path.startswith('/load-sales-raport'):
+            result = loadIndex(loadSale(self))
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write(result.encode('utf-8'))
+            
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')

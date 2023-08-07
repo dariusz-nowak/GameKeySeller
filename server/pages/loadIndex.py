@@ -1,4 +1,4 @@
-def loadIndex():
+def loadIndex(content):
     return """
         <!DOCTYPE html>
         <html lang="en">
@@ -16,10 +16,7 @@ def loadIndex():
                         <h2>Raporty</h2>
                         <ul>
                             <li onclick="loadPage('index')">Strona główna</li>
-                            <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
-                            <li class="todo" onclick="loadPage('load-sale')">Sprzedaż</li>
-                            <!-- Zakup per gra/gry oraz per czas -->
-                            <li class="todo">Zakup</li>
+                            <li onclick="loadPage('load-sale')">Sprzedaż</li>
                         </ul>
                     </div>
                     <div class="list">
@@ -50,6 +47,7 @@ def loadIndex():
                     </div>
                 </div>
                 <div class="container">
+                {containerContent}
                 </div>
             </div>
             <div class="scripts">
@@ -58,4 +56,4 @@ def loadIndex():
             </div>
         </body>
         </html>
-    """
+    """.format(containerContent = content)
