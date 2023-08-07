@@ -1,3 +1,4 @@
+
 data_container = document.querySelector('.content .container')
 
 async function loadPageHTML(page) {
@@ -23,8 +24,7 @@ async function loadPage(page) {
 // Sprawdzenie wystąpienia alertu
 const urlParams = new URLSearchParams(window.location.search);
 const alertMessage = urlParams.get('alert');
-if (alertMessage) data_container.innerHTML = alertMessage.slice(2, -1).replace(/\\n/g, '\n')
-else if (!alertMessage && window.location.pathname == '/') loadPage('index')
+if (alertMessage) data_container.innerHTML = getAlert(alertMessage.slice(2, -1))
 
 // Sprawdzenie polskich znaków w formularzu
 function checkForm() {
@@ -37,4 +37,7 @@ function checkForm() {
         return false;
     }
     return true;
+}
+function loadFiltersForm() {
+    document.querySelector('.sales-raport form').classList.toggle('hide')
 }

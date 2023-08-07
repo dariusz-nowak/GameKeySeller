@@ -13,7 +13,17 @@ def saveSale(self):
     fee = query_params.get('fee', [''])[0]
     purchasePlatform = query_params.get('purchase-platform', [''])[0]
     salesPlatform = query_params.get('sale-platform', [''])[0]
-    alert = f"<h1>Dodano sprzedaz. \nTytul: {title}\nCena zakupu: {buyPrice}\nCena sprzedazy: {sellPrice}\nZarobek: {float(buyPrice) - float(sellPrice)}\nZakupione w: {purchasePlatform}\n Sprzedane w: {salesPlatform}</h1>"
+    alert = f"""
+    [
+        "code": "001",
+        "title": "{title}",
+        "buyPrice": "{buyPrice}",
+        "sellprice": "{sellPrice}",
+        "profit": "{float(buyPrice) - float(sellPrice)}",
+        "purchasePlatform": "{purchasePlatform}",
+        "salesPlatform": "{salesPlatform}"
+    ]
+    """
 
     addSale({'title': title, 'buy price': buyPrice, 'sell price': sellPrice, 'fee': fee, 'purchase platform': purchasePlatform, 'sale platform': salesPlatform, 'date': date})
     
@@ -26,7 +36,13 @@ def saveSale(self):
 def savePlatform(platform, self): 
     query_params = parse_qs(urlparse(self.path).query)
     platformTitle = query_params.get('platform', [''])[0]
-    alert = f"<h1>Dodano platforme {'zakupu' if platform == 'purchase' else 'sprzedazy'}: {platformTitle}</h1>"
+    alert = f"""
+    [   
+        "code": "002",
+        "platformTitle": {platformTitle},
+        "platform": {'zakup' if platform == 'purchase' else 'sprzedaz'}
+    ]
+    """
 
     addPurchasePlatform({'platform': platformTitle}) if platform == 'purchase' else addSalesPlatform({'platform': platformTitle})
     

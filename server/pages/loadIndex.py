@@ -53,6 +53,7 @@ def loadIndex():
                 </div>
             </div>
             <div class="scripts">
+                <script src="frontend/javascript/alerts.js"></script>
                 <script src="frontend/javascript/main.js"></script>
             </div>
         </body>

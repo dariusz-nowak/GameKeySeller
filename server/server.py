@@ -57,6 +57,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path.startswith('/api/adding-sale'): redirect(saveSale(self))
         elif self.path.startswith('/api/add-purchase-platform'): redirect(savePlatform('purchase', self))
         elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self))
+        
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')
