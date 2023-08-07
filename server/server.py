@@ -18,7 +18,7 @@ routes = [
     '/api/load-sale', 
     '/api/adding-sale', '/api/add-sale', 
     '/api/adding-purchase-platform', '/api/add-purchase-platform', 
-    '/api/adding-sales-purchase', 'add-sales-purchase'
+    '/api/adding-sales-purchase', 'add-sales-purchase',
     ]
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
@@ -45,7 +45,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path in routes:
             if self.path == '/api/index': result = loadHomepage()
             elif self.path == '/api/adding-sale': result = loadAddingSale()
-            elif self.path == '/api/load-sale': result = loadSale()
+            elif self.path == '/api/load-sale': result = loadSale('')
             elif self.path == '/api/adding-purchase-platform': result = loadAddingPurchasePlatform()
             elif self.path == '/api/adding-sales-purchase': result = loadAddingSalesPlatform()
             
@@ -57,6 +57,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path.startswith('/api/adding-sale'): redirect(saveSale(self))
         elif self.path.startswith('/api/add-purchase-platform'): redirect(savePlatform('purchase', self))
         elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self))
+        elif self.path.startswith('/api/load-sales-raport'): result = loadSale(self)
         
         else:
             self.send_response(404)

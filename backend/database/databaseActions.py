@@ -84,6 +84,10 @@ def loadPopularSales(type):
         })
     return salesList
 
+def loadFilteredSales(filters):
+    print(filters)
+    pass
+
 def addPurchasePlatform(purchase):
     cursor.execute(f"INSERT INTO purchase_platforms VALUES(null, '{purchase['platform']}')")
     connection.commit()

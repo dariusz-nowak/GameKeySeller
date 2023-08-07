@@ -15,7 +15,7 @@ def saveSale(self):
     salesPlatform = query_params.get('sale-platform', [''])[0]
     alert = f"""
     [
-        "code": "001",
+        "name": "add sale",
         "title": "{title}",
         "buyPrice": "{buyPrice}",
         "sellprice": "{sellPrice}",
@@ -38,7 +38,7 @@ def savePlatform(platform, self):
     platformTitle = query_params.get('platform', [''])[0]
     alert = f"""
     [   
-        "code": "002",
+        "name": "add platform",
         "platformTitle": {platformTitle},
         "platform": {'zakup' if platform == 'purchase' else 'sprzedaz'}
     ]

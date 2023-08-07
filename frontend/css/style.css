@@ -4,6 +4,17 @@
     box-sizing: border-box;
     font-family: monospace;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+/* input[type=number] {
+  -moz-appearance: textfield;
+} */
 body {
     max-height: 100vh;
     overflow: hidden;
@@ -263,6 +274,7 @@ body {
     margin: 0;
     font-size: unset;
 }
+.content .sales-raport .filters .prices span,
 .content .sales-raport .filters .dates span {
     padding: 0 5px;
     font-size: 14px;
@@ -273,10 +285,21 @@ body {
 }
 .content .sales-raport .filters select#purchase-platform,
 .content .sales-raport .filters select#sale-platform,
-.content .sales-raport .filters input#purchase-price,
 .content .sales-raport .filters input#sell-price,
 .content .sales-raport .filters input#profit {
     width: 250px;
+}
+.content .sales-raport .filters input#purchase-price,
+.content .sales-raport .filters input#sell-price, 
+.content .sales-raport .filters input#fee,
+.content .sales-raport .filters input#profit {
+    width: 130px
+}
+.content .sales-raport .filters input.submit {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
 }
 .content .sales-raport table {
     width: 100%;
