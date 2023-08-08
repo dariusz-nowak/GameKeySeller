@@ -68,6 +68,7 @@ body {
 .window table.list th,
 .window table.list td {
     padding: 5px 10px;
+    text-align: center;
 }
 .window > table.list > thead,
 .window > table.list > tfoot {

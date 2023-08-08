@@ -108,8 +108,8 @@ def loadSale(self):
                 <th>Data</th>
                 <th>Gra</th>
                 <th>Platforma zakupu</th>
-                <th>Cena zakupu</th>
                 <th>Platforma sprzedaży</th>
+                <th>Cena zakupu</th>
                 <th>Cena sprzedaży</th>
                 <th>Prowizja</th>
                 <th>Profit</th>
@@ -147,11 +147,11 @@ def loadSale(self):
                     <td class="date">{data}</td>
                     <td class="game-title">{gameTitle}</td>
                     <td class="purchase-platform">{purchasePlatform}</td>
-                    <td class="purchase-price">{purchasePrice:.2f}</td>
                     <td class="sell-platform">{sellPlatform}</td>
-                    <td class="sell-price">{sellPrice:.2f}</td>
-                    <td class="fee">{fee:.2f}</td>
-                    <td class="profit">{profit:.2f}</td>
+                    <td class="purchase-price">{purchasePrice:.2f}zł</td>
+                    <td class="sell-price">{sellPrice:.2f}zł</td>
+                    <td class="fee">{fee:.2f}zł</td>
+                    <td class="profit">{profit:.2f}zł</td>
                 </tr>
         """.format(
             data = sale['date'],
@@ -171,11 +171,11 @@ def loadSale(self):
                     <td class="date"></td>
                     <td class="game-title"></td>
                     <td class="purchase-platform"></td>
-                    <td class="purchase-price">{purchasePrice:.2f}</td>
                     <td class="sell-platform"></td>
-                    <td class="sell-price">{sellPrice:.2f}</td>
-                    <td class="fee">{fee:.2f}</td>
-                    <td class="profit">{profit:.2f}</td>
+                    <td class="purchase-price">{purchasePrice:.2f}zł</td>
+                    <td class="sell-price">{sellPrice:.2f}zł</td>
+                    <td class="fee">{fee:.2f}zł</td>
+                    <td class="profit">{profit:.2f}zł</td>
                 </tr>
             </tfoot>
         </table>

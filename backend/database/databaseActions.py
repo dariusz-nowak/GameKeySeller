@@ -97,24 +97,23 @@ def loadFilteredSales(filters):
                 daysBefore = (datetime.strptime(filters['from date'], "%Y-%m-%d").date() - datetime.now().date()).days
                 query += f" time_created >= strftime('%Y-%m-%d', 'now', '{daysBefore} days')"
             if filters['to date']:
+                if filters['from date']: query += " AND"
                 daysAfter = (datetime.strptime(filters['to date'], "%Y-%m-%d").date() - datetime.now().date()).days
-                query += f" AND time_created <= strftime('%Y-%m-%d', 'now', '{daysAfter} days')"
-        else: 
-            query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days')"
-        if filters['game title']: query += f" AND title = '{filters['game title']}'"
+                query += f" time_created <= strftime('%Y-%m-%d', 'now', '{daysAfter} days')"
+        else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days')"
+        if filters['game title']: query += f" AND title LIKE '%{filters['game title']}%'"
         if filters['purchase platform']: query += f" AND buy_platform = '{filters['purchase platform']}'"
         if filters['sale platform']: query += f" AND sell_platform = '{filters['sale platform']}'"
-        if filters['min purchase price']: query += f" AND buy_price >= '{filters['min purchase price']}'"
-        if filters['max purchase price']: query += f" AND buy_price <= '{filters['max purchase price']}'"
-        if filters['min fee']: query += f" AND fee >= '{filters['min fee']}'"
-        if filters['max fee']: query += f" AND fee <= '{filters['max fee']}'"
-        if filters['min sell price']: query += f" AND sell_price >= '{filters['min sell price']}'"
-        if filters['max sell price']: query += f" AND sell_price <= '{filters['max sell price']}'"
-        if filters['min profit']: query += f" AND sell_price - buy_price - fee <= '{filters['min profit']}'"
-        if filters['max profit']: query += f" AND sell_price - buy_price - fee >= '{filters['max profit']}'"
-    else:
-        query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
-    
+        if filters['min purchase price']: query += f" AND buy_price >= {filters['min purchase price']}"
+        if filters['max purchase price']: query += f" AND buy_price <= {filters['max purchase price']}"
+        if filters['min fee']: query += f" AND fee >= {filters['min fee']}"
+        if filters['max fee']: query += f" AND fee <= {filters['max fee']}"
+        if filters['min sell price']: query += f" AND sell_price >= {filters['min sell price']}"
+        if filters['max sell price']: query += f" AND sell_price <= {filters['max sell price']}"
+        if filters['min profit']: query += f" AND sell_price - buy_price - fee >= {filters['min profit']}"
+        if filters['max profit']: query += f" AND sell_price - buy_price - fee <= {filters['max profit']}"
+    else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
+
     sales = cursor.execute(f"{query} ORDER BY time_created DESC").fetchall()
     salesList = []
     for sale in sales:
@@ -122,8 +121,8 @@ def loadFilteredSales(filters):
             'date': sale[7],
             'game title': sale[1],
             'purchase platform': sale[5],
-            'purchase price': sale[2],
             'sell platform': sale[6],
+            'purchase price': sale[2],
             'sell price': sale[3],
             'fee': sale[4],
             'profit': sale[3] - sale[2] - sale[4]
