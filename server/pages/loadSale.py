@@ -32,7 +32,7 @@ def loadSale(self):
             <div class="sales-raport big window">
                 <h1>Sprzedaż</h1>
                 <h3 onClick="loadFiltersForm()">Filtry v</h3>
-                <form action="/load-sales-raport" onsubmit="return checkForm()" method="get" class="hide">
+                <form action="/filtration/load-sales-raport" onsubmit="return checkForm()" method="get" class="hide">
                     <div class="filters">
                         <div>
                             <label for="game">Gra:</label>

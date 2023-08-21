@@ -8,6 +8,7 @@ from pages.loadAddingSale import loadAddingSale
 from pages.loadAddingPurchasePlatform import loadAddingPurchasePlatform
 from pages.loadAddingSalesPlatform import loadAddingSalesPlatform
 from pages.loadPopularPages import loadPopularPages
+from pages.loadPopularGames import loadPopularGames
 
 from pages.saveSale import saveSale, savePlatform
 from redirect import redirect
@@ -20,7 +21,7 @@ routes = [
     '/api/adding-sale', '/api/add-sale', 
     '/api/adding-purchase-platform', '/api/add-purchase-platform', 
     '/api/adding-sales-purchase', 'add-sales-purchase',
-    '/api/load-popular-pages'
+    '/api/load-popular-pages', '/api/load-popular-games', 
     ]
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
@@ -51,6 +52,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             elif self.path == '/api/adding-purchase-platform': result = loadAddingPurchasePlatform()
             elif self.path == '/api/adding-sales-purchase': result = loadAddingSalesPlatform()
             elif self.path == '/api/load-popular-pages': result = loadPopularPages(False)
+            elif self.path == '/api/load-popular-games': result = loadPopularGames(False)
             
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
@@ -61,20 +63,15 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path.startswith('/api/add-purchase-platform'): redirect(savePlatform('purchase', self), 'save')
         elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self), 'save')
 
-        elif self.path.startswith('/load-sales-raport'):
-            result = loadIndex(loadSale(self))
+        elif self.path.startswith('/filtration'):
+            if self.path.startswith('/filtration/load-sales-raport'): result = loadIndex(loadSale(self))
+            elif self.path.startswith('/filtration/load-popular-pages'): result = loadIndex(loadPopularPages(self))
+            elif self.path.startswith('/filtration/load-popular-games'): result = loadIndex(loadPopularPages(self))
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             self.wfile.write(result.encode('utf-8'))
-
-        elif self.path.startswith('/load-popular-pages'):
-            result = loadIndex(loadPopularPages(self))
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            self.wfile.write(result.encode('utf-8'))
-            
+        
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')

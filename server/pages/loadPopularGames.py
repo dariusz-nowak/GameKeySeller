@@ -2,18 +2,20 @@ from urllib.parse import parse_qs, urlparse
 
 import sys, os
 sys.path.append(f"{os.getcwd()}")
-from backend.database.databaseActions import loadPlatforms, loadFilteredPopularPages
+from backend.database.databaseActions import loadPlatforms, loadFilteredPopularGames
 
-def loadPopularPages(self):
+def loadPopularGames(self):
     filters = {
+        'game title': '',
         'purchase platform': '', 'sale platform': '',
         'min keys sold': '', 'max keys sold': '', 
-        'from date': '', 'to date': '', 
+        'from date': '', 'to date': '',
     }
 
     if self:
         query_params = parse_qs(urlparse(self.path).query)
         filters = {
+            'game title': query_params.get('game', [''])[0],
             'purchase platform': query_params.get('purchase-platform', [''])[0],
             'sale platform': query_params.get('sale-platform', [''])[0],
             'min keys sold': query_params.get('min-keys-sold', [''])[0],
@@ -24,11 +26,15 @@ def loadPopularPages(self):
 
     html = """
             <div class="popular-pages-raport big window">
-                <h1>Popularne strony</h1>
+                <h1>Popularne gry</h1>
                 <h3 onclick="loadPopularPagesFilterForm()">Filtry v</h3>
-                <form action="/filtration/load-popular-pages" onsubmit="" class="hide">
+                <form action="/filtration/load-popular-games" onsubmit="" class="hide">
                     <div class="filters">
-    """
+                        <div>
+                            <label for="game">Gra:</label>
+                            <input type="text" id="game" name="game" value="{gameTitle}">
+                        </div>
+    """.format(gameTitle = filters['game title'])
     
     purchasePlatforms = loadPlatforms('purchase_platforms')
     html += '<div>'
@@ -47,7 +53,6 @@ def loadPopularPages(self):
     html += '</select></div>'
 
     html += """
-                        <div class="separate"></div>
                         <div>
                             <label for="keys-sold">Ilość kluczy:</label>
                             <div class="prices">
@@ -72,6 +77,7 @@ def loadPopularPages(self):
                 <table class="list">
                     <thead>
                         <tr class="header">
+                            <th>Gra</th>
                             <th>Platforma zakupu</th>
                             <th>Platforma sprzedaży</th>
                             <th>Data ostatniego zakupu</th>
@@ -86,19 +92,21 @@ def loadPopularPages(self):
         toDate = filters['to date'],
     )
     
-    for platform in loadFilteredPopularPages(filters):
+    for game in loadFilteredPopularGames(filters):
         html += """
                 <tr class="popular-pages list">
+                    <td class="game">{gameTitle}</td>
                     <td class="purchase-platform">{purchasePlatform}</td>
                     <td class="sell-platform">{sellPlatform}</td>
                     <td class="date">{latestDate}</td>
                     <td class="keys-sold">{keysSold}</td>
                 </tr>
         """.format(
-            purchasePlatform = platform['purchase platform'],
-            sellPlatform = platform['sell platform'],
-            latestDate = platform['latest date'],
-            keysSold = platform['keys sold'],
+            gameTitle = game['game title'],
+            purchasePlatform = game['purchase platform'],
+            sellPlatform = game['sell platform'],
+            latestDate = game['latest date'],
+            keysSold = game['keys sold'],
             )
                     
     html += '</tbody></table></div>'

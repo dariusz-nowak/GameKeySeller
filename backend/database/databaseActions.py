@@ -166,6 +166,42 @@ def loadFilteredPopularPages(filters):
         
     return platformsList
 
+def loadFilteredPopularGames(filters):
+    filtration = False
+    for filter in filters.values():
+        if filter: filtration = True
+
+    query = "SELECT title, buy_platform, sell_platform, MAX(time_created) AS latest_date, COUNT(*) AS count FROM sales WHERE"
+
+    if filtration:
+        if filters['from date'] or filters['to date']: 
+            if filters['from date']: 
+                daysBefore = (datetime.strptime(filters['from date'], "%Y-%m-%d").date() - datetime.now().date()).days
+                query += f" time_created >= strftime('%Y-%m-%d', 'now', '{daysBefore} days')"
+            if filters['to date']:
+                if filters['from date']: query += " AND"
+                daysAfter = (datetime.strptime(filters['to date'], "%Y-%m-%d").date() - datetime.now().date()).days
+                query += f" time_created <= strftime('%Y-%m-%d', 'now', '{daysAfter} days')"
+        else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days')"
+        if filters['game title']: query += f" AND title LIKE '%{filters['game title']}%'"
+        if filters['purchase platform']: query += f" AND buy_platform = '{filters['purchase platform']}'"
+        if filters['sale platform']: query += f" AND sell_platform = '{filters['sale platform']}'"
+    else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
+     
+    games = cursor.execute(f"{query} GROUP BY title ORDER BY time_created DESC").fetchall()
+
+    gamesList = []
+    for game in games:
+        gamesList.append({
+            'game title': game[0],
+            'purchase platform': game[1],
+            'sell platform': game[2],
+            'latest date': game[3],
+            'keys sold': game[4],
+        })
+        
+    return gamesList
+
 def addPurchasePlatform(purchase):
     cursor.execute(f"INSERT INTO purchase_platforms VALUES(null, '{purchase['platform']}')")
     connection.commit()

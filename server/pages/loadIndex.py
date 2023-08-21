@@ -23,8 +23,7 @@ def loadIndex(content):
                         <h2>Statystyki</h2>
                         <ul>
                             <li onclick="loadPage('load-popular-pages')">Popularne strony</li>
-                            <!-- Popularność gier per kraj lub świat oraz per czas -->
-                            <li class="todo">Popularne gry</li>
+                            <li onclick="loadPage('load-popular-games')">Popularne gry</li>
                         </ul>
                     </div>
                     <div class="list">

@@ -45,4 +45,4 @@ function loadPopularPagesFilterForm() {
     document.querySelector('.popular-pages-raport form').classList.toggle('hide')
 }
 
-// loadPage('index')
+loadPage('index')
