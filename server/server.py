@@ -34,7 +34,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(result.encode('utf-8'))
 
-        elif self.path.startswith('/frontend'):
+        elif self.path.startswith('/frontend') or self.path.startswith('/frontend'):
             file_path = os.path.join(os.path.dirname(__file__), self.path[1:])
             file_path = file_path.replace('\\server', '').replace('/', '\\')
             if os.path.isfile(file_path):
@@ -64,9 +64,9 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
         elif self.path.startswith('/api/add-sales-platform'): redirect(savePlatform('sale', self), 'save')
 
         elif self.path.startswith('/filtration'):
-            if self.path.startswith('/filtration/load-sales-raport'): result = loadIndex(loadSale(self))
-            elif self.path.startswith('/filtration/load-popular-pages'): result = loadIndex(loadPopularPages(self))
-            elif self.path.startswith('/filtration/load-popular-games'): result = loadIndex(loadPopularPages(self))
+            if self.path.startswith('/filtration-load-sales-raport'): result = loadIndex(loadSale(self))
+            elif self.path.startswith('/filtration-load-popular-pages'): result = loadIndex(loadPopularPages(self))
+            elif self.path.startswith('/filtration-load-popular-games'): result = loadIndex(loadPopularGames(self))
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()

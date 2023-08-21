@@ -26,7 +26,7 @@ def loadPopularPages(self):
             <div class="popular-pages-raport big window">
                 <h1>Popularne strony</h1>
                 <h3 onclick="loadPopularPagesFilterForm()">Filtry v</h3>
-                <form action="/filtration/load-popular-pages" onsubmit="" class="hide">
+                <form action="/filtration-load-popular-pages" onsubmit="" class="hide">
                     <div class="filters">
     """
     
