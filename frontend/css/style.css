@@ -4,17 +4,15 @@
     box-sizing: border-box;
     font-family: monospace;
 }
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-/* Firefox */
-/* input[type=number] {
-  -moz-appearance: textfield;
-} */
+input[type=number] {
+    -moz-appearance:textfield;
+}
 body {
     max-height: 100vh;
     overflow: hidden;
@@ -245,75 +243,78 @@ body {
     position: unset;
     transform: none;
 }
-.content .sales-raport {
+.content .big.window {
     top: 0;
     left: 0;
     transform: translate(0,0);
 }
-.content .sales-raport form {
+.content .big.window form {
     height: 156px;
     transition: .4s;
     overflow: hidden;
 }
-.content .sales-raport form.hide {
+.content .big.window.popular-pages-raport form {
+    height: 104px;
+}
+.content .big.window form.hide {
     height: 0px;
 }
-.content .sales-raport .filters {
+.content .big.window .filters {
     flex-wrap: wrap;
     height: unset;
     padding: 0;
     background-color: #1b2538;
 }
-.content .sales-raport .filters > div {
+.content .big.window .filters > div {
     display: flex;
     justify-content: space-between;
     flex-basis: 33.3333%;
     padding: 10px 20px;
     border: 1px solid #000;
 }
-.content .sales-raport .filters span {
+.content .big.window .filters span {
     font-size: 20px;
     margin: 10px 0;
     padding: 10px 20px;
     transition: .4s;
     cursor: pointer;
 }
-.content .sales-raport .filters span:hover {
+.content .big.window .filters span:hover {
     background-color: #ddd;
     color: #333;
 }
-.content .sales-raport .filters label {
+.content .big.window .filters label {
     height: 30px;
     line-height: 30px;
 }
-.content .sales-raport .filters input,
-.content .sales-raport .filters select {
+.content .big.window .filters input,
+.content .big.window .filters select {
     width: 130px;
     height: 30px;
     margin: 0;
     font-size: unset;
 }
-.content .sales-raport .filters .prices span,
-.content .sales-raport .filters .dates span {
+.content .big.window .filters .prices span,
+.content .big.window .filters .dates span {
     padding: 0 5px;
     font-size: 14px;
 }
-.content .sales-raport .filters input#game,
-.content .sales-raport .filters input#fee {
+.content .big.window .filters input#game,
+.content .big.window .filters input#fee {
     width: 350px;
 }
-.content .sales-raport .filters select#purchase-platform,
-.content .sales-raport .filters select#sale-platform,
-.content .sales-raport .filters input#sell-price,
-.content .sales-raport .filters input#profit {
+.content .big.window .filters select#purchase-platform,
+.content .big.window .filters select#sale-platform,
+.content .big.window .filters input#sell-price,
+.content .big.window .filters input#profit {
     width: 250px;
 }
-.content .sales-raport .filters input.submit {
+.content .big.window .filters input.submit {
     width: 100%;
     margin: 0 auto;
     text-align: center;
     font-size: 16px;
 }
-.content .sales-raport table {
+.content .big.window table {
     width: 100%;
 }

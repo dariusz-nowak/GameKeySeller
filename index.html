@@ -14,10 +14,7 @@
                 <h2>Raporty</h2>
                 <ul>
                     <li onclick="loadPage('index')">Strona główna</li>
-                    <!-- Sprzedaż per kraj lub świat oraz per gra/gry oraz per czas-->
-                    <li class="todo" onclick="loadPage('load-sale')">Sprzedaż</li>
-                    <!-- Zakup per gra/gry oraz per czas -->
-                    <li class="todo">Zakup</li>
+                    <li onclick="loadPage('load-sale')">Sprzedaż</li>
                 </ul>
             </div>
             <div class="list">
@@ -48,6 +45,58 @@
             </div>
         </div>
         <div class="container">
+
+            <div class="popular-pages-raport big window">
+                <h1>Popularne strony</h1>
+                <h3 onclick="loadPopularPagesFilterForm()">Filtry v</h3>
+                <form action="/load-popular-pages" onsubmit="return checkForm()" class="hide">
+                    <div class="filters">
+                        <div>
+                            <label for="purchase-platform">Platforma zakupu:</label>
+                            <select name="purchase-platform" id="purchase-platform">
+                                <option value=''></option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="sale-platform">Platforma sprzedaży:</label>
+                            <select name="sale-platform" id="sale-platform">
+                                <option value=''></option>
+                            </select>
+                        </div>
+                        <div class="separate"></div>
+                        <div>
+                            <label for="keys-sold">Ilość kluczy:</label>
+                            <div class="prices">
+                                <input type="number" id="keys-sold" name="keys-sold" value="">
+                                <span>-</span>
+                                <input type="number" id="keys-sold" name="keys-sold" value="">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="date">Data:</label>
+                            <div class="dates">
+                                <input type="date" id="from-date" name="from-date" value="">
+                                <span>-</span>
+                                <input type="date" id="to-date" name="to-date" value="">
+                            </div>
+                        </div>
+                        <div>
+                            <input class="submit" type="submit" value="Filtruj">
+                        </div>
+                    </div>
+                </form>
+                <table class="list">
+                    <thead>
+                        <tr class="header">
+                            <th>Platforma zakupu</th>
+                            <th>Platforma sprzedaży</th>
+                            <th>Data ostatniego zakupu</th>
+                            <th>Ilość sprzedanych kluczy</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
     </div>
     <div class="scripts">

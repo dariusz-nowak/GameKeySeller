@@ -41,3 +41,8 @@ function checkForm() {
 function loadFiltersForm() {
     document.querySelector('.sales-raport form').classList.toggle('hide')
 }
+function loadPopularPagesFilterForm() {
+    document.querySelector('.popular-pages-raport form').classList.toggle('hide')
+}
+
+// loadPage('index')

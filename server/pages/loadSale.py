@@ -115,6 +115,7 @@ def loadSale(self):
                 <th>Profit</th>
             </tr>
         </thead>
+        <tbody>
     """.format(
         minPurchasePrice = filters['min purchase price'],
         maxPurchasePrice = filters['max purchase price'],
@@ -127,8 +128,6 @@ def loadSale(self):
         minProfit = filters['min profit'],
         maxProfit = filters['max profit'],
         )
-
-    html += '<tbody>'
     
     salesSum = {
         'purchase price': 0,

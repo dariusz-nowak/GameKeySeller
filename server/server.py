@@ -7,6 +7,7 @@ from pages.loadAddingSale import loadAddingSale
 
 from pages.loadAddingPurchasePlatform import loadAddingPurchasePlatform
 from pages.loadAddingSalesPlatform import loadAddingSalesPlatform
+from pages.loadPopularPages import loadPopularPages
 
 from pages.saveSale import saveSale, savePlatform
 from redirect import redirect
@@ -19,6 +20,7 @@ routes = [
     '/api/adding-sale', '/api/add-sale', 
     '/api/adding-purchase-platform', '/api/add-purchase-platform', 
     '/api/adding-sales-purchase', 'add-sales-purchase',
+    '/api/load-popular-pages'
     ]
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
@@ -48,6 +50,7 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             elif self.path == '/api/load-sale': result = loadSale(False)
             elif self.path == '/api/adding-purchase-platform': result = loadAddingPurchasePlatform()
             elif self.path == '/api/adding-sales-purchase': result = loadAddingSalesPlatform()
+            elif self.path == '/api/load-popular-pages': result = loadPopularPages(False)
             
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
@@ -64,13 +67,20 @@ class SimpleRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             self.wfile.write(result.encode('utf-8'))
+
+        elif self.path.startswith('/load-popular-pages'):
+            result = loadIndex(loadPopularPages(self))
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write(result.encode('utf-8'))
             
         else:
             self.send_response(404)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write('Nie znaleziono strony'.encode('utf-8'))
-
+        
 def runServer():
     server_address = ('localhost', 8080)
     httpd = HTTPServer(server_address, SimpleRequestHandler)

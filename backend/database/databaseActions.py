@@ -115,6 +115,7 @@ def loadFilteredSales(filters):
     else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
 
     sales = cursor.execute(f"{query} ORDER BY time_created DESC").fetchall()
+
     salesList = []
     for sale in sales:
         salesList.append({
@@ -129,6 +130,41 @@ def loadFilteredSales(filters):
         })
         
     return salesList
+
+def loadFilteredPopularPages(filters):
+    filtration = False
+    for filter in filters.values():
+        if filter: filtration = True
+
+    query = "SELECT buy_platform, sell_platform, MAX(time_created) AS latest_date, COUNT(*) AS count FROM sales WHERE"
+
+    if filtration:
+        if filters['from date'] or filters['to date']: 
+            if filters['from date']: 
+                daysBefore = (datetime.strptime(filters['from date'], "%Y-%m-%d").date() - datetime.now().date()).days
+                query += f" time_created >= strftime('%Y-%m-%d', 'now', '{daysBefore} days')"
+            if filters['to date']:
+                if filters['from date']: query += " AND"
+                daysAfter = (datetime.strptime(filters['to date'], "%Y-%m-%d").date() - datetime.now().date()).days
+                query += f" time_created <= strftime('%Y-%m-%d', 'now', '{daysAfter} days')"
+        else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days')"
+        if filters['purchase platform']: query += f" AND buy_platform = '{filters['purchase platform']}'"
+        if filters['sale platform']: query += f" AND sell_platform = '{filters['sale platform']}'"
+    else: query += " time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now')"
+
+    group = 'buy_platform' if filtration and not filters['sale platform'] else 'sell_platform'        
+    platforms = cursor.execute(f"{query} GROUP BY {group} ORDER BY time_created DESC").fetchall()
+
+    platformsList = []
+    for platform in platforms:
+        platformsList.append({
+            'purchase platform': platform[0],
+            'sell platform': platform[1],
+            'latest date': platform[2],
+            'keys sold': platform[3],
+        })
+        
+    return platformsList
 
 def addPurchasePlatform(purchase):
     cursor.execute(f"INSERT INTO purchase_platforms VALUES(null, '{purchase['platform']}')")
