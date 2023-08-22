@@ -62,7 +62,7 @@ def addSale(sale):
     connection.commit()
 
 def loadMonthSales():
-    sales = cursor.execute("SELECT title, sell_price, buy_price, fee, sell_platform, time_created FROM sales WHERE time_created >= strftime('%Y-%m-%d', 'now', '-31 days') AND time_created <= strftime('%Y-%m-%d', 'now') ORDER BY time_created DESC").fetchall()
+    sales = cursor.execute("SELECT title, sell_price, buy_price, fee, sell_platform, time_created FROM sales WHERE time_created >= strftime('%Y-%m-%d', 'now', '-30 days') AND time_created <= strftime('%Y-%m-%d', 'now') ORDER BY time_created DESC").fetchall()
     salesList = []
     for sale in sales:
         salesList.append({

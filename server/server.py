@@ -26,7 +26,6 @@ routes = [
 
 class SimpleRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        
         if self.path == '/' or self.path.startswith('/alert'): 
             result = loadIndex('')
             self.send_response(200)
