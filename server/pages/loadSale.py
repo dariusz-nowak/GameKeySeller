@@ -1,10 +1,9 @@
 from urllib.parse import parse_qs, urlparse
-
 import sys, os
 sys.path.append(f"{os.getcwd()}")
 from backend.database.databaseActions import loadPlatforms, loadFilteredSales
 
-def loadSale(self):
+def loadSale(self, loadTableExporter):
     filters = {
             'game title': '', 'purchase platform': '', 'sale platform': '', 'min purchase price': '',
             'max purchase price': '', 'min fee': '', 'max fee': '', 'from date': '', 'to date': '',
@@ -185,7 +184,6 @@ def loadSale(self):
         fee = salesSum['fee'],
         profit = salesSum['profit'],
     )
-
-    html += "</tfoot></table></div>"
-        
+    
+    html += f"</tfoot></table>{loadTableExporter()}</div>"
     return html

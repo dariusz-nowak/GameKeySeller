@@ -4,7 +4,7 @@ import sys, os
 sys.path.append(f"{os.getcwd()}")
 from backend.database.databaseActions import loadPlatforms, loadFilteredPopularGames
 
-def loadPopularGames(self):
+def loadPopularGames(self, loadTableExporter):
     filters = {
         'game title': '',
         'purchase platform': '', 'sale platform': '',
@@ -109,5 +109,5 @@ def loadPopularGames(self):
             keysSold = game['keys sold'],
             )
                     
-    html += '</tbody></table></div>'
+    html += f"</tbody></table></div>{loadTableExporter()}"
     return html

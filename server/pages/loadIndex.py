@@ -8,6 +8,10 @@ def loadIndex(content):
             <title>Panel zarządzania</title>
 
             <link rel="stylesheet" href="frontend/css/style.css">
+            
+            <script src="frontend/javascript/jspdf.js"></script>
+            <script src="frontend/javascript/jspdf.autotable.js"></script>
+            <script src="frontend/javascript/RobotoMono-VariableFont_wght-normal.js"></script>
         </head>
         <body>
             <div class="content">

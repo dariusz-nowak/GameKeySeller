@@ -1,4 +1,3 @@
-
 data_container = document.querySelector('.content .container')
 
 async function loadPageHTML(page) {
@@ -38,11 +37,84 @@ function checkForm() {
     }
     return true;
 }
+
 function loadFiltersForm() {
     document.querySelector('.sales-raport form').classList.toggle('hide')
 }
+
 function loadPopularPagesFilterForm() {
     document.querySelector('.popular-pages-raport form').classList.toggle('hide')
 }
 
+function tableExporter() {
+    const table = document.querySelector('table.list')
+    const tableRows = table.querySelectorAll('tbody tr')
+    const tableHeaderRow = table.querySelector('thead tr')
+
+    let data = []
+    let footerData = []
+    let tableColumnHeaders = []
+
+    tableHeaderRow.querySelectorAll('th').forEach(headerCell => {
+        tableColumnHeaders.push(headerCell.innerText)
+    })
+
+    if (table.querySelector('tfoot tr')) {
+        const tableFooterRow = table.querySelector('tfoot tr')
+        tableFooterRow.querySelectorAll('td').forEach(cell => {
+            footerData.push(cell.innerText);
+        });
+    } else tableFooterRow = ""
+
+    tableRows.forEach(row => {
+        const rowData = []
+        row.querySelectorAll('td').forEach(cell => {
+            rowData.push(cell.innerText)
+        })
+        data.push(rowData);
+    });
+
+    const doc = new jspdf.jsPDF({
+        orientation: 'l'
+    })
+    
+    header = document.querySelector('.window h1').innerText + " "
+    if (document.querySelector('.window input#from-date').value + " - ") {
+        fromDate = document.querySelector('.window input#from-date').value + " - "
+    } else fromDate = "nieokreślono" + " - "
+    if (document.querySelector('.window input#to-date').value) {
+        toDate = document.querySelector('.window input#to-date').value
+    } else toDate = "nieokreślono"
+
+    doc.autoTable({
+        head: [tableColumnHeaders],
+        body: data,
+        startY: 22,
+        headStyles: { fillColor: [100, 100, 100] },
+        foot: [footerData],
+        footStyles: { fillColor: [200, 200, 200] },
+        styles: {
+            font: "roboto",
+            fontSize: 8,
+            halign: 'center'
+        },
+        didDrawPage: function(data) {
+            function centerTextOnPage(doc, text, yPosition) {
+                const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor
+                const pageWidth = doc.internal.pageSize.width
+                const centerX = (pageWidth - textWidth) / 2
+                doc.text(text, centerX, yPosition)
+            }
+            
+            doc.setFont("roboto");
+            doc.setFontSize(12)
+            doc.setTextColor(100)
+            
+            centerTextOnPage(doc, header, 10)
+            centerTextOnPage(doc, fromDate + toDate, 16)
+        }
+    })
+
+    doc.save(header + fromDate + toDate + '.pdf');
+}
 // loadPage('index')

@@ -4,7 +4,7 @@ import sys, os
 sys.path.append(f"{os.getcwd()}")
 from backend.database.databaseActions import loadPlatforms, loadFilteredPopularPages
 
-def loadPopularPages(self):
+def loadPopularPages(self,loadTableExporter):
     filters = {
         'purchase platform': '', 'sale platform': '',
         'min keys sold': '', 'max keys sold': '', 
@@ -101,5 +101,5 @@ def loadPopularPages(self):
             keysSold = platform['keys sold'],
             )
                     
-    html += '</tbody></table></div>'
+    html += f"</tbody></table></div>{loadTableExporter()}"
     return html
