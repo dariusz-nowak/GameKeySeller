@@ -1,9 +1,5 @@
 from requests import post
-
-clientID = None
-client_secret = None
-
-def oAuthHeader():
+def oAuthHeader(clientID, client_secret):
     tokenInformations = post('https://www.olx.pl/api/open/oauth/token', json = {
         "grant_type": "authorization_code",
         "client_id": clientID,

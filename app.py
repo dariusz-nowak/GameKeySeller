@@ -25,10 +25,24 @@ def getDataFromSteam(gamesList, exclusionsList):
 
 # == OLX ==
 def olxActions(gamesList):
-    # header = oAuthHeader()
-    header = None
     for gameType in gamesList:
         for game in gamesList[gameType]:
+            # Zrobić pętle po wszystkich krajach OLX
+            #
+            # platforms = [
+            #     { 'platform': 'OLX PL', 'client ID': 'cID', 'client secret': 'cST' },
+            #     { 'platform': 'OLX BG', 'client ID': 'cID', 'client secret': 'cST' },
+            #     { 'platform': 'OLX RO', 'client ID': 'cID', 'client secret': 'cST' },
+            #     { 'platform': 'OLX PT', 'client ID': 'cID', 'client secret': 'cST' },
+            #     { 'platform': 'OLX UA', 'client ID': 'cID', 'client secret': 'cST' },
+            #     { 'platform': 'OLX KZ', 'client ID': 'cID', 'client secret': 'cST' }
+            # ]
+            #
+            # for platform in platforms:
+            #     header = oAuthHeader(platform['client ID'], platform['client secret'])
+            #     Część kodu odpowiedzialna za tworzenie, edycje i usuwanie ofert
+
+            header = None
             if game['status'] == 'new': createAuction(game, header)
             elif game['status'] == 'different price': editAuction(game, header)
             elif game['status'] == 'deleted': removeAuction(game, header)

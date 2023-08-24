@@ -274,7 +274,8 @@ body {
     transition: .4s;
     overflow: hidden;
 }
-.content .big.window.popular-pages-raport form {
+.content .big.window.popular-pages-raport form,
+.content .big.window.popular-games-raport form {
     height: 104px;
 }
 .content .big.window form.hide {

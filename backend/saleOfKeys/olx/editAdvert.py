@@ -1,4 +1,4 @@
-from backend.saleOfKeys.olx.advertsActions import createAdvertData, priceDetermination
+from backend.saleOfKeys.olx.advertsActions import createAdvertData
 from backend.database.databaseActions import getAdvertID, editAdvert
 from requests import put
 

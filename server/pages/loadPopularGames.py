@@ -25,9 +25,9 @@ def loadPopularGames(self, loadTableExporter):
         }
 
     html = """
-            <div class="popular-pages-raport big window">
+            <div class="popular-games-raport big window">
                 <h1>Popularne gry</h1>
-                <h3 onclick="loadPopularPagesFilterForm()">Filtry v (NAPRAWIĆ)</h3>
+                <h3 onclick="loadPopularGamesFilterForm()">Filtry v (NAPRAWIĆ)</h3>
                 <form action="/filtration-load-popular-games" onsubmit="" class="hide">
                     <div class="filters">
                         <div>

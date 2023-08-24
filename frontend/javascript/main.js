@@ -46,6 +46,14 @@ function loadPopularPagesFilterForm() {
     document.querySelector('.popular-pages-raport form').classList.toggle('hide')
 }
 
+function loadPopularGamesFilterForm() {
+    document.querySelector('.popular-games-raport form').classList.toggle('hide')
+}
+
+function loadAdvertsFilterForm() {
+    document.querySelector('.adverts-raport form').classList.toggle('hide')
+}
+
 function tableExporter() {
     const table = document.querySelector('table.list')
     const tableRows = table.querySelectorAll('tbody tr')

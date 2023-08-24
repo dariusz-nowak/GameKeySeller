@@ -46,7 +46,7 @@ def getAdvertID(gameID):
 
 def addAdvert(advert):
     title = advert['title'].replace('\'', '`')
-    cursor.execute(f"INSERT INTO adverts VALUES(null, {advert['game id']}, '{title}', '{advert['image']}', {advert['price']}, '{advert['url']}')")
+    cursor.execute(f"INSERT INTO adverts VALUES(null, {advert['advert id']}, {advert['platform']}, '{title}', {advert['price']}, {advert['currency']}, '{advert['url']}')")
     connection.commit()
 
 def editAdvert(advert):

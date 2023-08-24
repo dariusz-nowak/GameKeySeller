@@ -33,8 +33,12 @@ def loadIndex(content):
                     <div class="list">
                         <h2>Oferty</h2>
                         <ul>
-                            <!-- Dodać wszystkie dostępne kraje sprzedaży OLX w widoku OLX/ALLEGRO -->
-                            <li class="todo">OLX</li>
+                            <li class="todo">OLX PL</li>
+                            <li class="todo">OLX BG</li>
+                            <li class="todo">OLX RO</li>
+                            <li class="todo">OLX PT</li>
+                            <li class="todo">OLX UA</li>
+                            <li class="todo">OLX KZ</li>
                             <li class="todo">ALLEGRO</li>
                         </ul>
                     </div>
