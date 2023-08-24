@@ -8,7 +8,7 @@ def oAuthHeader(clientID, client_secret):
     }).json()
     
     if tokenInformations['expires_in'] == 0: 
-        tokenInformations['access_token'] = refreshAccessToken(tokenInformations['refresh_token'])
+        tokenInformations['access_token'] = refreshAccessToken(tokenInformations['refresh_token'], clientID, client_secret)
 
     return {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ def oAuthHeader(clientID, client_secret):
         "Version": "2.0",
     }
 
-def refreshAccessToken(refreshToken):
+def refreshAccessToken(refreshToken, clientID, client_secret):
     return post('https://www.olx.pl/api/open/oauth/token', json = {
         "grant_type": "refresh_token",
         "client_id": clientID,
