@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 def loadHomepage():
     html = '<div class="homepage">'
     
-    # Sprzedaż aktualny miesiąc lub ostatnie 30 dni
     dates = {}
     sales = loadMonthSales()
     current_date = datetime.now().date()
@@ -36,7 +35,7 @@ def loadHomepage():
             </div>
         """.format(day = date[0:2], 
                    month = date[3:5], 
-                   width = f"{(dates[str(date)] / bestSale) * 100 if bestSale > 0 else 0}%",
+                   width = f'{(dates[str(date)] / bestSale) * 100 if bestSale > 0 else 0}%',
                    value = f'{dates[str(date)]:.2f} zł' if dates[str(date)] > 0 else '')
     html += "</div></div>"
     

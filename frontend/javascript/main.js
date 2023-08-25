@@ -53,6 +53,9 @@ function loadPopularGamesFilterForm() {
 function loadAdvertsFilterForm() {
     document.querySelector('.adverts-raport form').classList.toggle('hide')
 }
+function loadAdvertsFilterForm() {
+    
+}
 
 function tableExporter() {
     const table = document.querySelector('table.list')

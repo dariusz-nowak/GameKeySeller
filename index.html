@@ -18,30 +18,15 @@
                 <h2>Raporty</h2>
                 <ul>
                     <li onclick="loadPage('index')">Strona główna</li>
+                    <li class="todo">Oferty</li>
                     <li onclick="loadPage('load-sale')">Sprzedaż</li>
                 </ul>
             </div>
             <div class="list">
                 <h2>Statystyki</h2>
                 <ul>
-                    <!-- Popularność stron zakupowych per kraj lub świat oraz per czas -->
                     <li>Popularne strony</li>
-                    <!-- Popularność gier per kraj lub świat oraz per czas -->
                     <li>Popularne gry</li>
-                </ul>
-            </div>
-            <div class="list">
-                <h2>Oferty</h2>
-                <ul>
-                    <!-- Dodać wszystkie dostępne kraje sprzedaży OLX w widoku OLX/ALLEGRO -->
-                    <li class="todo">Wszystkie</li>
-                    <li class="todo">OLX PL</li>
-                    <li class="todo">OLX BG</li>
-                    <li class="todo">OLX RO</li>
-                    <li class="todo">OLX PT</li>
-                    <li class="todo">OLX UA</li>
-                    <li class="todo">OLX KZ</li>
-                    <li class="todo">ALLEGRO</li>
                 </ul>
             </div>
             <div class="separate"></div>
@@ -58,7 +43,11 @@
             <div class="adverts-raport big window">
                 <h1>Wszystkie oferty</h1>
                 <h3 onclick="loadAdvertsFilterForm()">Filtry v</h3>
-                <form class="hide" action="">Jakieś Filtry</form>
+                <form class="hide" action="">
+                    <div class="filters">
+                        
+                    </div>
+                </form>
                 <table class="list">
                     <thead>
                         <th>ID</th>

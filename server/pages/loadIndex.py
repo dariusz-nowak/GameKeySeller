@@ -20,6 +20,7 @@ def loadIndex(content):
                         <h2>Raporty</h2>
                         <ul>
                             <li onclick="loadPage('index')">Strona główna</li>
+                            <li class="todo">Oferty</li>
                             <li onclick="loadPage('load-sale')">Sprzedaż</li>
                         </ul>
                     </div>
@@ -28,18 +29,6 @@ def loadIndex(content):
                         <ul>
                             <li onclick="loadPage('load-popular-pages')">Popularne strony</li>
                             <li onclick="loadPage('load-popular-games')">Popularne gry</li>
-                        </ul>
-                    </div>
-                    <div class="list">
-                        <h2>Oferty</h2>
-                        <ul>
-                            <li class="todo">OLX PL</li>
-                            <li class="todo">OLX BG</li>
-                            <li class="todo">OLX RO</li>
-                            <li class="todo">OLX PT</li>
-                            <li class="todo">OLX UA</li>
-                            <li class="todo">OLX KZ</li>
-                            <li class="todo">ALLEGRO</li>
                         </ul>
                     </div>
                     <div class="separate"></div>
